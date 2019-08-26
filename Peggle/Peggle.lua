@@ -221,12 +221,12 @@ e.locale = {
 	["OPT_AUTO_OPEN1"] = "On Flight Start",
 	["OPT_AUTO_OPEN2"] = "On Death",
 	["OPT_AUTO_OPEN3"] = "On Log-in",
-	["OPT_AUTO_OPEN4"] = "Duel Invite",
+	["OPT_AUTO_OPEN4"] = "Peggle Duel Invite",
 	["OPT_AUTO_CLOSE"] = "Auto-Close:",
 	["OPT_AUTO_CLOSE1"] = "On Flight End",
 	["OPT_AUTO_CLOSE2"] = "On Ready Check",
 	["OPT_AUTO_CLOSE3"] = "On Enter Combat",
-	["OPT_AUTO_CLOSE4"] = "Duel Complete",
+	["OPT_AUTO_CLOSE4"] = "Peggle Duel Complete",
 	["OPT_AUTO_CLOSE5"] = "Peggle Loot Complete",
 	["OPT_DUEL_INVITES"] = "Duel/Battle Invites:",
 	["OPT_DUEL_INVITES1"] = "Chatbox Text Alert",
@@ -626,8 +626,8 @@ local V;
 PeggleData = {};
 PeggleData.newData = {};
 PeggleData.newData = {["levelScores"] = {}, ["talentData"] = { ["activated"] = {0,0,0,0,0,0,0,0,0,0,0} }}
-PeggleData.settings = {mouseOnTrans = 1, mouseOffTrans = .6, showMinimapIcon = true, openFlightStart = true, openDeath = true, openLogIn = true, openDuel = true, closeFlightEnd = false, closeReadyCheck = true, closeCombat = true, closeDuelComplete = false, closePeggleLoot = false, inviteChat = true, inviteRaid = false, inviteMinimap = true, inviteDecline = false, hideOutdated = false;
-soundVolume = 0, minimapAngle = 270, defaultPublish = "GUILD", };
+PeggleData.settings = {mouseOnTrans = 1, mouseOffTrans = .6, showMinimapIcon = true, openFlightStart = false, openDeath = false, openLogIn = false, openDuel = true, closeFlightEnd = false, closeReadyCheck = true, closeCombat = true, closeDuelComplete = false, closePeggleLoot = false, inviteChat = true, inviteRaid = false, inviteMinimap = true, inviteDecline = false, hideOutdated = false;
+soundVolume = 0, minimapAngle = 35, defaultPublish = "GUILD", }; -- avoid hiding behind clock
 PeggleData.version = e.versionID;
 PeggleData.recent = {};
 PeggleProfile = {};
@@ -637,7 +637,7 @@ PeggleProfile.lastDuels = {};
 PeggleProfile.levelTracking = {};
 PeggleProfile.duelTracking = {};
 function o.MinuteDifference(h, u, S, a, i)
-	local date=C_Calendar.GetDate()
+	local date=C_DateAndTime.GetTodaysDate()
 	local t, l, c, r = date.weekday, date.month, date.monthDay, date.year;
 	local d, s = GetGameTime();
 	local n = 0;
@@ -4858,7 +4858,7 @@ local function pe(c, m, x, d, l, S)
 	n[t[5]] = S;
 	n[t[6]] = true;
 	n[t[7]] = d;
-	local date=C_Calendar.GetDate()
+	local date=C_DateAndTime.GetTodaysDate()
 	local e, b, T, P = date.weekday, date.month, date.monthDay, date.year;
 	local f, S = GetGameTime();
 	Fe(c);
@@ -4921,7 +4921,7 @@ local function ge(n)
 		local a = S(O(W(e, 10)));
 		local a = S(c(e, 11, 12));
 		local a = c(e, 69);
-		local date=C_Calendar.GetDate()
+		local date=C_DateAndTime.GetTodaysDate()
 		local e, e, e, e = date.weekday, date.month, date.monthDay, date.year;
 		local e, e = GetGameTime();
 		t[1] = n[o[4]];
@@ -7551,7 +7551,7 @@ local function ee()
 			e.guildOption1:Hide();
 			e.guildOption2:Hide();
 			if(e.setSrc == 1)then
-				e.nameSlider:SetMinMaxValues(0, F(0, GetNumFriends() - 15));
+				e.nameSlider:SetMinMaxValues(0, F(0, C_FriendList.GetNumFriends() - 15));
 			elseif(e.setSrc == 2)then
 				local t = GetNumGuildMembers();
 				e.nameSlider:SetMinMaxValues(0, F(0, t - 15));
@@ -7595,8 +7595,8 @@ local function ee()
 		local e = t.catagoryScreen.frames[3].content2;
 		local o, n;
 		if(e.setSrc == 1)then
-			o = GetFriendInfo;
-			n = GetNumFriends();
+			o = C_FriendList.GetFriendInfo;
+			n = C_FriendList.GetNumFriends();
 		elseif(e.setSrc == 2)then
 			o = GetGuildRosterInfo;
 			n = GetNumGuildMembers();
@@ -8192,6 +8192,7 @@ local function G()
 		t:SetScript("OnClick", xt);
 		t:SetScript("OnEnter", c);
 		t:SetScript("OnLeave", r);
+		UIParentLoadAddOn("Blizzard_TalentUI")
 		if(o)then
 			t.arrow = t:CreateTexture(nil, "Background", "TalentBranchTemplate");
 			t.arrow:SetTexCoord(unpack(TALENT_BRANCH_TEXTURECOORDS.down[ - 1]));
@@ -9028,7 +9029,7 @@ local function w(n, l, ...)
 		t.splash.foreground:SetAlpha(1);
 	end
 	if(not AchievementFrame)then
-		AchievementFrame_LoadUI();
+		--AchievementFrame_LoadUI();
 	end
 	local n = CreateFrame("Button", "exhibitA", UIParent, "AchievementAlertFrameTemplate");
 	n:Hide();
@@ -9047,13 +9048,13 @@ local function w(n, l, ...)
 		if(t.duelStatus == 3)and not PeggleData.exhibitA then
 			PeggleData.exhibitA = true;
 			if(not AchievementFrame)then
-				AchievementFrame_LoadUI();
+				--AchievementFrame_LoadUI();
 			end
 			e.elapsed = 0;
 			e.state = nil;
 			e:SetAlpha(0);
 			e.id = 0;
-			e:SetScript("OnUpdate", AchievementAlertFrame_OnUpdate);
+			--e:SetScript("OnUpdate", AchievementAlertFrame_OnUpdate);
 			e:UnregisterAllEvents();
 			e:Show();
 		end
@@ -9072,7 +9073,7 @@ local function w(n, l, ...)
 	--getglobal(n:GetName().."Name"):SetText("");
 	--local l = getglobal(n:GetName().."Shield");
 	if(l.points)then
-		AchievementShield_SetPoints(10, l.points, GameFontNormal, GameFontNormalSmall);
+		--AchievementShield_SetPoints(10, l.points, GameFontNormal, GameFontNormalSmall);
 	end
 	if(l.icon)then
 		l.icon:SetTexture("Interface\\AchievementFrame\\UI-Achievement-Shields");
@@ -11132,14 +11133,14 @@ local function T()
 		elseif(n == "achievement")then
 			if(PeggleData.exhibitA)then
 				if(not AchievementFrame)then
-					AchievementFrame_LoadUI();
+					--AchievementFrame_LoadUI();
 				end
 				local e = t.achieve;
 				e.elapsed = 0;
 				e.state = nil;
 				e:SetAlpha(0);
 				e.id = 0;
-				e:SetScript("OnUpdate", AchievementAlertFrame_OnUpdate);
+				--e:SetScript("OnUpdate", AchievementAlertFrame_OnUpdate);
 				e:UnregisterAllEvents();
 				e:Show();
 			end

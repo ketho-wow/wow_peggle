@@ -1,5 +1,9 @@
 Changelog
 
+v2.2.1-classic
+- Updated for World of Warcraft Classic
+- No longer shows by default on login, flight start and death
+
 v2.2
 - Fixed /peggleloot
 
