@@ -9075,6 +9075,21 @@ local function w(n, l, ...)
 	if(not AchievementFrame)then
 		--AchievementFrame_LoadUI();
 	end
+	-- [[ Achievement Shield ]] --
+	if not AchievementShield_OnLoad then
+		function AchievementShield_Desaturate (self)
+			self.icon:SetTexCoord(.5, 1, 0, 0.5);
+		end
+
+		function AchievementShield_Saturate (self)
+			self.icon:SetTexCoord(0, .5, 0, 0.5);
+		end
+
+		function AchievementShield_OnLoad (self)
+			self.Desaturate = AchievementShield_Desaturate;
+			self.Saturate = AchievementShield_Saturate;
+		end
+	end
 	local n = CreateFrame("Button", "exhibitA", UIParent, "AchievementAlertFrameTemplate");
 	n:Hide();
 	n:ClearAllPoints();
