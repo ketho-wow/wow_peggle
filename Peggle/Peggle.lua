@@ -626,8 +626,28 @@ local V;
 PeggleData = {};
 PeggleData.newData = {};
 PeggleData.newData = {["levelScores"] = {}, ["talentData"] = { ["activated"] = {0,0,0,0,0,0,0,0,0,0,0} }}
-PeggleData.settings = {mouseOnTrans = 1, mouseOffTrans = .6, showMinimapIcon = true, openFlightStart = false, openDeath = false, openLogIn = false, openDuel = true, closeFlightEnd = false, closeReadyCheck = true, closeCombat = true, closeDuelComplete = false, closePeggleLoot = false, inviteChat = true, inviteRaid = false, inviteMinimap = true, inviteDecline = false, hideOutdated = false;
-soundVolume = 0, minimapAngle = 35, defaultPublish = "GUILD", }; -- avoid hiding behind clock
+PeggleData.settings = {
+	mouseOnTrans = 1,
+	mouseOffTrans = .6,
+	showMinimapIcon = true,
+	openFlightStart = false,
+	openDeath = false,
+	openLogIn = false,
+	openDuel = true,
+	closeFlightEnd = false,
+	closeReadyCheck = true,
+	closeCombat = true,
+	closeDuelComplete = false,
+	closePeggleLoot = false,
+	inviteChat = true,
+	inviteRaid = false,
+	inviteMinimap = true,
+	inviteDecline = false,
+	hideOutdated = false;
+	soundVolume = 0,
+	minimapAngle = 17, -- avoid hiding behind clock and minimap tracking frame
+	defaultPublish = "GUILD",
+};
 PeggleData.version = e.versionID;
 PeggleData.recent = {};
 PeggleProfile = {};
@@ -8810,8 +8830,28 @@ local function w(n, l, ...)
 		PeggleData = {};
 		PeggleData.newData = {};
 		PeggleData.newData = {["levelScores"] = {}, ["talentData"] = {["points"] = 0, ["activated"] = {0,0,0,0,0,0,0,0,0,0,0} }}
-		PeggleData.settings = {mouseOnTrans = 1, mouseOffTrans = .6, showMinimapIcon = true, openFlightStart = true, openDeath = true, openLogIn = true, openDuel = true, closeFlightEnd = false, closeReadyCheck = true, closeCombat = true, closeDuelComplete = false, closePeggleLoot = false, inviteChat = true, inviteRaid = false, inviteMinimap = true, inviteDecline = false, hideOutdated = false;
-		soundVolume = 0, minimapAngle = 270, defaultPublish = "GUILD", };
+		PeggleData.settings = {
+			mouseOnTrans = 1,
+			mouseOffTrans = .6,
+			showMinimapIcon = true,
+			openFlightStart = false,
+			openDeath = false,
+			openLogIn = false,
+			openDuel = true,
+			closeFlightEnd = false,
+			closeReadyCheck = true,
+			closeCombat = true,
+			closeDuelComplete = false,
+			closePeggleLoot = false,
+			inviteChat = true,
+			inviteRaid = false,
+			inviteMinimap = true,
+			inviteDecline = false,
+			hideOutdated = false;
+			soundVolume = 0,
+			minimapAngle = 17,
+			defaultPublish = "GUILD",
+		};
 		PeggleData.version = e.versionID;
 		PeggleData.recent = {};
 		PeggleProfile = {};
@@ -8841,6 +8881,10 @@ local function w(n, l, ...)
 	if(PeggleProfile.version < 1.02)then
 		PeggleProfile.challenges = {};
 		PeggleProfile.version = 1.02;
+	end
+	-- fix up minimapAngle mistake in v2.2.1
+	if PeggleProfile.version == 2.2 and PeggleData.settings.minimapAngle == 35 then
+		PeggleData.settings.minimapAngle = 17
 	end
 	V = PeggleData
 	Y = PeggleProfile.challenges;
