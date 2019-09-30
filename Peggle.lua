@@ -83,7 +83,7 @@ C_ChatInfo.RegisterAddonMessagePrefix(e.addonName);
 e.locale = {
 	["ABOUT"] = "ABOUT",
 	["ABOUT_TEXT1"] = "The Peggle Institute has opened a branch in Azeroth!\n\n".."After we successfully brought the Bejeweled experience into ".."WoW, the PopCap Guild decided to tackle another of our favorite things: Peggle.\n\n".."We wanted something more competitive that we could use to settle ".."loot disputes and challenge each other while we waited for that ".."last raid member to log on. We've packed in some great touches ".."for the add-on version of Peggle, and now it's ready to be shared with the world!",
-	["ABOUT_TEXT2"] = "For more great games check out |cFFFF66CChttp://popcap.com|r\n".."LF [Programmer] @ |cFFFF66CChttps://github.com/adamz01h/wow_peggle",
+	["ABOUT_TEXT2"] = "For more great games check out |cFFFF66CChttp://popcap.com|r",
 	["ABOUT_TEXT3"] = "(C) 2007, 2009 PopCap Games, Inc. All rights reserved.",
 	["ABOUT_TEXT4"] = "Version ",
 	["_BALL_SCORE"] = "+10,000",
@@ -143,7 +143,7 @@ e.locale = {
 	["CREDITS8a"] = "BraveOne - Aerie Peak [A]\n".."Johndoe - Executus EU [A]\n".."Kinu - Ravencrest [H]\n".."Klauen - Blackrock [H]\n".."Lothaer - Spinebreaker [A]\n".."Naiad - Dalaran [A]",
 	["CREDITS8b"] = "Palasadia - Doomhammer [H]\n".."Polgarra - Terokkar [A]\n".."Smashtastic - Khadgar [A]\n".."Sythalin - Thunderlord[A]\n".."Thanotos- Turalyon[A]\n".."Vodax - Dalaran [A]\n".."Zoquara - Nordrassil [A]",
 	["CREDITS9"] = "Github Contributors",
-	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210",
+	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210\nKetho",
 	["DUEL"] = "DUEL",
 	["DUEL_BREAKDOWN1"] = "Your Score: %s",
 	["DUEL_BREAKDOWN1a"] = "Opponent's Score: %s",
@@ -194,7 +194,7 @@ e.locale = {
 	["INVITE_PERSON"] = "INVITE INDIVIDUAL:",
 	["INVITE_NOTE"] = "NOTE TO INVITEES",
 	["LEGAL1"] = "(c) 2000, 2009 PopCap Games Inc. All right reserved",
-	["LEGAL2"] = "(c)2007, 2009 PopCap Games, Inc.  All rights reserved.  This application is ".."being made available free of charge for your personal, non-commercial entertainment "..'use, and is provided "as is", without any warranties.  PopCap Games, Inc. will have '.."no liability to you or anyone else if you choose to use it.  See readme.txt for details.",
+	["LEGAL2"] = "(c) 2007, 2009 PopCap Games, Inc.  All rights reserved.  This application is ".."being made available free of charge for your personal, non-commercial entertainment "..'use, and is provided "as is", without any warranties.  PopCap Games, Inc. will have '.."no liability to you or anyone else if you choose to use it.  See readme.txt for details.",
 	["_LEVEL_INFO"] = "Level %d: %s",
 	["MENU"] = "MENU",
 	["MOST_RECENT"] = "MOST RECENT:",
@@ -235,10 +235,10 @@ e.locale = {
 	["OPT_DUEL_INVITES4"] = "Auto-decline Duels",
 	["OPTIONAL"] = "|cFFFF8C00(OPTIONAL)",
 	["ORANGE_PEGS"] = "Orange\nPegs",
-	["OUT_OF_DATE"] = "|cFFFFFFFFThis version of Peggle is out-of-date! Visit |r|cFFFF66CChttps://github.com/adamz01h/wow_peggle|r|cFFFFFFFF for the latest version!",
+	["OUT_OF_DATE"] = "|cFFFFFFFFThis version of Peggle is out-of-date! Visit |r|cFFFF66CChttps://www.curseforge.com/wow/addons/peggle-classic|r|cFFFFFFFF for the latest version!",
 	["_OUTDATED"] = "%s has invited you to a %s using an old version of this addon. Unfortunately, the versions are no longer compatible. Please ask them to upgrade to the latest version.",
 	["_PEGS_HIT"] = "%s x %d |4PEG:PEGS",
-	["_PEGGLE_ISSUE1"] = "[Peggle] We're very sorry but it appears the battle data being saved is invalid and was not saved. Please report this error with as much detail as possible so we can fix it in future versions. https://github.com/adamz01h/wow_peggle",
+	["_PEGGLE_ISSUE1"] = "[Peggle] We're very sorry but it appears the battle data being saved is invalid and was not saved. Please report this error with as much detail as possible so we can fix it in future versions. https://www.curseforge.com/wow/addons/peggle-classic",
 	["PEGGLE_ISSUE2"] = "Part of the Peggle addon is corrupt. Please re-download the Peggle addon to fix this issue.",
 	["PEGGLELOOT_DESC"] = "Highest Scoring Single Shot Wins",
 	["_PEGGLELOOT_ISACTIVE"] = "Peggle Loot is already active! %d seconds remain in current challenge.",
@@ -251,9 +251,9 @@ e.locale = {
 	["_PEGGLELOOT_WINNER"] = "*** Winner: %s ***",
 	["PERSONAL_BEST"] = "PERSONAL BEST:",
 	["PERSONAL_BEST_PTS"] = "%s PTS",
-	["_PUBLISH_SCORE"] = "[Peggle]: %s just scored %s points on %s! Download the Peggle Addon for Wow to defeat their score! https://github.com/adamz01h/wow_peggle",
-	["_PUBLISH_DUEL_W"] = "[Peggle]: %s just defeated %s in a Peggle Duel! Download the Peggle Addon for Wow to pit your skills against them!",
-	["_PUBLISH_DUEL_L"] = "[Peggle]: %s was just defeated by %s in a Peggle Duel! Download the Peggle Addon for Wow to pit your skills against them!",
+	["_PUBLISH_SCORE"] = "[Peggle]: %s just scored %s points on %s! Download the Peggle addon for WoW to defeat their score! https://www.curseforge.com/wow/addons/peggle-classic",
+	["_PUBLISH_DUEL_W"] = "[Peggle]: %s just defeated %s in a Peggle Duel! Download the Peggle addon for WoW to pit your skills against them!",
+	["_PUBLISH_DUEL_L"] = "[Peggle]: %s was just defeated by %s in a Peggle Duel! Download the Peggle addon for WoW to pit your skills against them!",
 	["_PUBLISH_1"] = CHAT_MSG_GUILD,
 	["_PUBLISH_2"] = CHAT_MSG_PARTY,
 	["_PUBLISH_3"] = CHAT_MSG_RAID,
@@ -658,7 +658,7 @@ PeggleProfile.levelTracking = {};
 PeggleProfile.duelTracking = {};
 function o.MinuteDifference(h, u, S, a, i)
 	local date=C_DateAndTime.GetTodaysDate()
-	local t, l, c, r = date.weekday, date.month, date.monthDay, date.year;
+	local t, l, c, r = date.weekDay, date.month, date.day, date.year;
 	local d, s = GetGameTime();
 	local n = 0;
 	if(r - i > 1)then
@@ -4879,7 +4879,7 @@ local function pe(c, m, x, d, l, S)
 	n[t[6]] = true;
 	n[t[7]] = d;
 	local date=C_DateAndTime.GetTodaysDate()
-	local e, b, T, P = date.weekday, date.month, date.monthDay, date.year;
+	local e, b, T, P = date.weekDay, date.month, date.day, date.year;
 	local f, S = GetGameTime();
 	Fe(c);
 	local a = #B;
@@ -4942,7 +4942,7 @@ local function ge(n)
 		local a = S(c(e, 11, 12));
 		local a = c(e, 69);
 		local date=C_DateAndTime.GetTodaysDate()
-		local e, e, e, e = date.weekday, date.month, date.monthDay, date.year;
+		local e, e, e, e = date.weekDay, date.month, date.day, date.year;
 		local e, e = GetGameTime();
 		t[1] = n[o[4]];
 		t[2] = d;
@@ -6382,7 +6382,7 @@ local function oe()
 	l.status5 = e.locale["DUEL_STATUS5"];
 	l.status6 = e.locale["DUEL_STATUS6"];
 	a.note3 = l;
-	l = o:CreateCaption(0, 0, e.locale["WIN_LOSS"], n, 12, 0, 1, 0, mil, nil)
+	l = o:CreateCaption(0, 0, e.locale["WIN_LOSS"], n, 12, 0, 1, 0, nil, nil)
 	l:ClearAllPoints();
 	l:SetPoint("Topleft", a, "Bottomleft", 20, 60);
 	l:SetWidth(300);
@@ -7526,21 +7526,22 @@ local function ee()
 	n:SetPoint("Bottomleft", 10, 10);
 	n:SetWidth(350);
 	l = x(14, 342, e.locale["CHALLENGE_VIEW_OFFLINE"], "guildViewOnline", true, a, function(e)
-	if(e:GetChecked())then
-		SetGuildRosterShowOffline(true);
-	else
-		SetGuildRosterShowOffline(false);
-	end
-	a.nameSlider:SetMinMaxValues(0, F(0, GetNumGuildMembers() - 15));
-	local e = t.catagoryScreen.frames[3].content2;
-	if(e.nameSlider:GetValue() == 0)then
-		e.nameSlider:GetScript("OnValueChanged")(e.nameSlider);
-	else
-		e.nameSlider:SetValue(0);
-	end
+		if(e:GetChecked())then
+			SetGuildRosterShowOffline(true);
+		else
+			SetGuildRosterShowOffline(false);
+		end
+		a.nameSlider:SetMinMaxValues(0, F(0, GetNumGuildMembers() - 15));
+		local e = t.catagoryScreen.frames[3].content2;
+		if(e.nameSlider:GetValue() == 0)then
+			e.nameSlider:GetScript("OnValueChanged")(e.nameSlider);
+		else
+			e.nameSlider:SetValue(0);
+		end
 	end, 1, .82, 0, tooltipText, true)
+	-- only gets set on init so might no necessarily reflect the current guildmember offline option
+	l:SetChecked(GetGuildRosterShowOffline())
 	l:SetHitRectInsets(0,  - 120, 0, 0);
-	l:SetChecked(true);
 	l:Hide();
 	a.guildOption1 = l;
 	l = x(14, 362, e.locale["CHALLENGE_SORT_ONLINE"], "guildSortOnline", true, a, function(e)
@@ -7581,7 +7582,7 @@ local function ee()
 					end
 				end
 				e.guildOption1:Show();
-				e.guildOption2:Show();
+				--e.guildOption2:Show(); -- seems unneeded
 			else
 				local n, n, o, t
 				e.serverChannels = {EnumerateServerChannels()}
@@ -7615,7 +7616,7 @@ local function ee()
 		local e = t.catagoryScreen.frames[3].content2;
 		local o, n;
 		if(e.setSrc == 1)then
-			o = C_FriendList.GetFriendInfo;
+			o = C_FriendList.GetFriendInfoByIndex;
 			n = C_FriendList.GetNumFriends();
 		elseif(e.setSrc == 2)then
 			o = GetGuildRosterInfo;
@@ -7630,7 +7631,14 @@ local function ee()
 		for l = 1, 15 do
 			t = e["listItemA"..l];
 			if(l + a) <= n then
-				i, _, _, _, d, _, _, _, r = o(l + a);
+				if o == C_FriendList.GetFriendInfoByIndex then
+					local info = o(l + a);
+					i = info.name
+					d = info.connected
+					r = info.guid
+				else
+					i, _, _, _, d, _, _, _, r = o(l + a);
+				end
 				t:SetText(i);
 				if(e.setSrc == 1)and not d then
 					t:SetTextColor(.5, .5, .5);
@@ -11213,6 +11221,10 @@ local function T()
 	end
 	SLASH_PEGGLELOOT1 = "/peggleloot";
 	SlashCmdList["PEGGLELOOT"] = function(l)
+		if GetNumGroupMembers() == 0 then
+			print("|CFFFFDD00Peggle: You are not in a "..GROUP..".")
+			return
+		end
 		l = strtrim(l);
 		if not l or(l == "")then
 			l = e.locale["_THE_ITEM"];
