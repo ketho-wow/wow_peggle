@@ -3432,12 +3432,6 @@ local function qe(t, o, C, P)
 	o.bestObj = nil;
 end
 local function Ne(o, n)
-	-- Maybe slightly hacky to put the check here but hard to figure out a proper place in this obfuscated mess
-	if(PeggleData.settings.highFPS == true)then
-		PeggleGameWindow.delay = 1/144;
-	else
-		PeggleGameWindow.delay = 1/60;
-	end
 	o.elapsed = o.elapsed + n;
 	if(o.elapsed < o.delay)then
 		return;
@@ -6123,6 +6117,7 @@ local function me()
 		Ae(t:GetParent().showID);
 		R(true);
 		Q = false;
+		PeggleGameWindow.delay = PeggleData.settings.highFPS and 1/144 or 1/60
 	end)
 	n:ClearAllPoints();
 	n:SetPoint("Top", a.bestFrame, "Bottom", 0,  - 71);
