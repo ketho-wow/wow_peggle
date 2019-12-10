@@ -1,11 +1,8 @@
 "The Peggle Institute has opened a branch in Azeroth!"
-A game made by PopCap Games, Inc. 
 
-WoW Patch 1.13.2 Peggle Addon
-An updated Peggle addon that has long abandoned.
+Download: https://www.curseforge.com/wow/addons/peggle-classic
 
-Just download the zip and place the "Peggle" folder into the /Interface/AddOns/ folder.
-
-Anybugs please use !Swatter/!BugGrabber addon to report issues.
-
-Any help getting this addon to 100% is welcome.
+© 2007, 2009 PopCap Games, Inc. All rights reserved. The  
+PopCap Logo and all other trademarks used herein that are listed  
+at www.popcap.com/trademarks are owned by PopCap Games, Inc. or  
+its licensors and may be registered in some countries.
