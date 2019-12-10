@@ -63,7 +63,7 @@ TALENT_ARROW_TEXTURECOORDS = {
 };
 
 local e = {};
-e.versionString = "2.2";
+e.versionString = "2.2.6";
 e.versionID = 2.2;
 e.addonName = "PEGGLE";
 e.temp = {};
@@ -143,7 +143,7 @@ e.locale = {
 	["CREDITS8a"] = "BraveOne - Aerie Peak [A]\n".."Johndoe - Executus EU [A]\n".."Kinu - Ravencrest [H]\n".."Klauen - Blackrock [H]\n".."Lothaer - Spinebreaker [A]\n".."Naiad - Dalaran [A]",
 	["CREDITS8b"] = "Palasadia - Doomhammer [H]\n".."Polgarra - Terokkar [A]\n".."Smashtastic - Khadgar [A]\n".."Sythalin - Thunderlord[A]\n".."Thanotos- Turalyon[A]\n".."Vodax - Dalaran [A]\n".."Zoquara - Nordrassil [A]",
 	["CREDITS9"] = "Github Contributors",
-	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210\nKetho",
+	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210\n Ketho",
 	["DUEL"] = "DUEL",
 	["DUEL_BREAKDOWN1"] = "Your Score: %s",
 	["DUEL_BREAKDOWN1a"] = "Opponent's Score: %s",
