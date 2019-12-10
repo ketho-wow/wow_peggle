@@ -217,6 +217,7 @@ e.locale = {
 	["OPT_LOCK"] = "Lock Window",
 	["OPT_COLORBLIND"] = "Color Blind Mode",
 	["OPT_HIDEOUTDATED"] = "Hide Outdated Chat Notifications",
+	["OPT_HIGHFPS"] = "144FPS mode(up from 60)",
 	["OPT_AUTO_OPEN"] = "Auto-Open:",
 	["OPT_AUTO_OPEN1"] = "On Flight Start",
 	["OPT_AUTO_OPEN2"] = "On Death",
@@ -639,6 +640,7 @@ PeggleData.settings = {
 	closeCombat = true,
 	closeDuelComplete = false,
 	closePeggleLoot = false,
+	highFPS = false,
 	inviteChat = true,
 	inviteRaid = false,
 	inviteMinimap = true,
@@ -862,7 +864,7 @@ local function Fe(o)
 			t.time = 1;
 			t.timeOffset = 0;
 		end
-		block = block + 1 
+		block = block + 1
 		s(B, t);
 	end
 end
@@ -3430,6 +3432,12 @@ local function qe(t, o, C, P)
 	o.bestObj = nil;
 end
 local function Ne(o, n)
+	-- Maybe slightly hacky to put the check here but hard to figure out a proper place in this obfuscated mess
+	if(PeggleData.settings.highFPS == true)then
+		PeggleGameWindow.delay = 1/144;
+	else
+		PeggleGameWindow.delay = 1/60;
+	end
 	o.elapsed = o.elapsed + n;
 	if(o.elapsed < o.delay)then
 		return;
@@ -8468,7 +8476,7 @@ local function _()
 	n = o:CreateSlider(a, l, 300, e.locale["OPT_TRANS_MOUSE"], "mouseOffTrans", d, 0, 1, .01, true, nil)
 	n:ClearAllPoints();
 	n:SetPoint("Top", 0,  - 70);
-	n = x(a, l, e.locale["OPT_MINIMAP"], "showMinimapIcon", true, d, function(e)
+	n = x(a, l - 5, e.locale["OPT_MINIMAP"], "showMinimapIcon", true, d, function(e)
 		PeggleData.settings[e.key] = (e:GetChecked());
 		if(e:GetChecked())then
 			t.minimap:Show();
@@ -8479,8 +8487,9 @@ local function _()
 	local r = function(e)
 		PeggleData.settings[e.key] = (e:GetChecked());
 	end;
-	n = x(a, l + 20, e.locale["OPT_COLORBLIND"], "colorBlindMode", true, d, r, 1, .82, 0);
-	n = x(a, l + 40, e.locale["OPT_HIDEOUTDATED"], "hideOutdated", true, d, r, 1, .82, 0);
+	n = x(a, l + 15, e.locale["OPT_COLORBLIND"], "colorBlindMode", true, d, r, 1, .82, 0);
+	n = x(a, l + 35, e.locale["OPT_HIDEOUTDATED"], "hideOutdated", true, d, r, 1, .82, 0);
+	n = x(a, l + 55, e.locale["OPT_HIGHFPS"], "highFPS", true, d, r, 1, .82, 0);
 	a = 50;
 	l = 150 + 60 - 8 - 20;
 	n = o:CreateCaption(a, l, e.locale["OPT_AUTO_OPEN"], d, 14, 1, 1, 0)
@@ -8626,7 +8635,7 @@ local function _()
 	c:SetHeight(i((r[2] - r[1]) * (512 - 128) + .5));
 	c:SetTexture(e.artPath.."board1");
 	c:SetTexCoord(r[2], r[4], r[1], r[4], r[2], r[3], r[1], r[3]);
-	
+
 	--Set up draw space
 	local i = 60;
 	local r = 20;
@@ -8635,19 +8644,19 @@ local function _()
 	a = o:CreateCaption(r, i, e.locale["CREDITS1"], l, 16, 1, 1, 0, nil, nil)
 	a = o:CreateCaption(r + 20, i + 20, e.locale["CREDITS1a"], l, 14, 1, .85, .1, nil, nil)
 	a:SetJustifyH("LEFT");
-	
+
 	--Producer Credit
 	i = i + 25 + 15 * 1
 	a = o:CreateCaption(r, i, e.locale["CREDITS2"], l, 16, 1, 1, 0, nil, nil)
 	a = o:CreateCaption(r + 20, i + 20, e.locale["CREDITS2a"], l, 14, 1, .85, .1, nil, nil)
 	a:SetJustifyH("LEFT");
-	
-	--Artist Credit 
+
+	--Artist Credit
 	i = i + 25 + 15 * 1
 	a = o:CreateCaption(r, i, e.locale["CREDITS3"], l, 16, 1, 1, 0, nil, nil)
 	a = o:CreateCaption(r + 20, i + 20, e.locale["CREDITS3a"], l, 14, 1, .85, .1, nil, nil)
 	a:SetJustifyH("LEFT");
-	
+
 	--Level Design Credit
 	i = i + 25 + 15 * 2
 	a = o:CreateCaption(r, i, e.locale["CREDITS4"], l, 16, 1, 1, 0, nil, nil)
@@ -8659,7 +8668,7 @@ local function _()
 	a = o:CreateCaption(r, i, e.locale["CREDITS5"], l, 16, 1, 1, 0, nil, nil)
 	a = o:CreateCaption(r + 20, i + 20, e.locale["CREDITS5a"], l, 14, 1, .85, .1, nil, nil)
 	a:SetJustifyH("LEFT");
-	
+
 	--Peggle Credits
 	i = i + 25 + 15 * 2
 	a = o:CreateCaption(r, i, e.locale["CREDITS6"], l, 16, 1, 1, 0, nil, nil)
@@ -8678,7 +8687,7 @@ local function _()
 	--Set up our header text
 	a = o:CreateCaption(r + 10, i, e.locale["CREDITS9"], l, 16, 1, 1, 0, nil, nil)
 
-	--make list of names 
+	--make list of names
 	a = o:CreateCaption(r + 30, i + 20, e.locale["CREDITS9a"], l, 14, 1, .85, .1, nil, nil)
 	a:SetJustifyH("LEFT");
 
@@ -8693,8 +8702,8 @@ local function _()
 	--beta tester credits
 	--reset r as half the window width
 	local r = l:GetWidth() / 2;
-	--set the location of drawing the credit text as "i" 
-	i = i + 100 
+	--set the location of drawing the credit text as "i"
+	i = i + 100
 	a = o:CreateCaption(r + 10, i, e.locale["CREDITS8"], l, 16, 1, 1, 0, nil, nil)
 	r = l:GetWidth() / 3;
 	a = o:CreateCaption(r, i + 16, e.locale["CREDITS8a"], l, 12, 1, .85, .1, nil, nil)
@@ -8726,7 +8735,7 @@ local function K()
 	e.outdatedText:SetPoint("Bottom", 0, 0);
 	e.outdatedText:Hide();
 	e.outdatedText:SetAlpha(1);
-	
+
 	local l = e.GetBackdrop();
 	l.bgFile = e.artPath.."windowBackground";
 	l.tileSize = 128;
@@ -8851,6 +8860,7 @@ local function w(n, l, ...)
 			closeCombat = true,
 			closeDuelComplete = false,
 			closePeggleLoot = false,
+			highFPS = false,
 			inviteChat = true,
 			inviteRaid = false,
 			inviteMinimap = true,
@@ -9491,6 +9501,8 @@ local function W()
 end
 local function w()
 	local e = CreateFrame("Frame", "", UIParent);
+	-- Make the variable global so we can set framerate outside of it
+	PeggleGameWindow = e
 	e:SetWidth(1);
 	e:SetHeight(1);
 	e:EnableMouse(false);
