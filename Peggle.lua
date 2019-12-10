@@ -9496,7 +9496,7 @@ local function w()
 	e:EnableMouse(false);
 	e:SetAlpha(0);
 	e.elapsed = 0;
-	e.delay = .025;
+	e.delay = 1/60;
 	e:SetScript("OnUpdate", Ne);
 	e.tableCos = {}
 	e.tableSin = {}
