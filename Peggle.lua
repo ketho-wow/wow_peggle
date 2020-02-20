@@ -63,7 +63,7 @@ TALENT_ARROW_TEXTURECOORDS = {
 };
 
 local e = {};
-e.versionString = "2.2.6";
+e.versionString = GetAddOnMetadata("Peggle", "Version");
 e.versionID = 2.2;
 e.addonName = "PEGGLE";
 e.temp = {};
