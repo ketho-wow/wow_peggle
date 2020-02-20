@@ -8223,7 +8223,11 @@ local function G()
 		t:SetScript("OnClick", xt);
 		t:SetScript("OnEnter", c);
 		t:SetScript("OnLeave", r);
-		UIParentLoadAddOn("Blizzard_TalentUI")
+		-- in Classic the frame templates are loadondemand
+		-- moreover, loading the addon early in retail will break textures in the talent frame
+		if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+			UIParentLoadAddOn("Blizzard_TalentUI")
+		end
 		if(o)then
 			t.arrow = t:CreateTexture(nil, "Background", "TalentBranchTemplate");
 			t.arrow:SetTexCoord(unpack(TALENT_BRANCH_TEXTURECOORDS.down[ - 1]));
