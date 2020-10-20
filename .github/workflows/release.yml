@@ -17,9 +17,7 @@ jobs:
       - uses: actions/checkout@v1
 
       - uses: BigWigsMods/packager@master
-        with:
-          args: release.sh
 
       - uses: BigWigsMods/packager@master
         with:
-          args: release.sh -g 1.13.5
+          args: -g 1.13.5
