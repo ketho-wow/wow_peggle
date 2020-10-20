@@ -2,6 +2,8 @@ local AddOn, config = ...
 local LEVELS = config.LEVELS
 local LEVEL_NAMES = config.LEVEL_NAMES
 
+config.backdroptmpl = BackdropTemplateMixin and "BackdropTemplate"
+
 disableSplashScreen = false
 
 TALENT_BRANCH_TEXTURECOORDS = {
@@ -659,8 +661,8 @@ PeggleProfile.lastDuels = {};
 PeggleProfile.levelTracking = {};
 PeggleProfile.duelTracking = {};
 function o.MinuteDifference(h, u, S, a, i)
-	local date=C_DateAndTime.GetTodaysDate()
-	local t, l, c, r = date.weekDay, date.month, date.day, date.year;
+	local date=C_DateAndTime.GetCurrentCalendarTime()
+	local t, l, c, r = date.weekday, date.month, date.monthDay, date.year;
 	local d, s = GetGameTime();
 	local n = 0;
 	if(r - i > 1)then
@@ -4880,8 +4882,8 @@ local function pe(c, m, x, d, l, S)
 	n[t[5]] = S;
 	n[t[6]] = true;
 	n[t[7]] = d;
-	local date=C_DateAndTime.GetTodaysDate()
-	local e, b, T, P = date.weekDay, date.month, date.day, date.year;
+	local date=C_DateAndTime.GetCurrentCalendarTime()
+	local e, b, T, P = date.weekday, date.month, date.monthDay, date.year;
 	local f, S = GetGameTime();
 	Fe(c);
 	local a = #B;
@@ -4943,8 +4945,8 @@ local function ge(n)
 		local a = S(O(W(e, 10)));
 		local a = S(c(e, 11, 12));
 		local a = c(e, 69);
-		local date=C_DateAndTime.GetTodaysDate()
-		local e, e, e, e = date.weekDay, date.month, date.day, date.year;
+		local date=C_DateAndTime.GetCurrentCalendarTime()
+		local e, e, e, e = date.weekday, date.month, date.monthDay, date.year;
 		local e, e = GetGameTime();
 		t[1] = n[o[4]];
 		t[2] = d;
@@ -5452,7 +5454,7 @@ local function re()
 	t.feverTracker = a;
 end
 local function he()
-	local n = CreateFrame("Frame", "", t.artBorder);
+	local n = CreateFrame("Frame", "", t.artBorder, config.backdroptmpl);
 	n:SetPoint("Center", r, "Center", 0,  - 20)
 	n:SetWidth(380);
 	n:SetHeight(260);
@@ -5590,7 +5592,7 @@ local function he()
 	n:ClearAllPoints();
 	n:SetPoint("Bottom", 0, 16);
 	n:Show();
-	n = CreateFrame("Frame", "", S);
+	n = CreateFrame("Frame", "", S, config.backdroptmpl);
 	n:SetPoint("Bottom", 0, 10)
 	n:SetWidth(340);
 	n:SetHeight(200);
@@ -5670,7 +5672,7 @@ local function he()
 	e:SetPoint("Bottomright",  - 16, 16);
 end
 local function ce()
-	local n = CreateFrame("Frame", "", t.artBorder);
+	local n = CreateFrame("Frame", "", t.artBorder, config.backdroptmpl);
 	n:SetPoint("Center", r, "Center", 0,  - 20)
 	n:SetWidth(240);
 	n:SetHeight(214);
@@ -5735,7 +5737,7 @@ local function ce()
 	return l;
 end
 local function fe()
-	local n = CreateFrame("Frame", "", t.artBorder);
+	local n = CreateFrame("Frame", "", t.artBorder, config.backdroptmpl);
 	n:SetPoint("Center", r, "Center", 0,  - 20)
 	n:SetWidth(340);
 	n:SetHeight(260);
@@ -5789,7 +5791,7 @@ local function fe()
 		end
 	end
 	l.edgeFile = e.artPath.."CharSelectBorder";
-	n = CreateFrame("Frame", "", a);
+	n = CreateFrame("Frame", "", a, config.backdroptmpl);
 	n:SetPoint("Center",  - 80, 0)
 	n:SetWidth(140);
 	n:SetHeight(140);
@@ -5810,7 +5812,7 @@ local function fe()
 	n:SetScript("OnLeave", o);
 	n:SetID(me);
 	a.focus = n;
-	n = CreateFrame("Frame", "", a);
+	n = CreateFrame("Frame", "", a, config.backdroptmpl);
 	n:SetPoint("Center", 80, 0)
 	n:SetWidth(140);
 	n:SetHeight(140);
@@ -5859,7 +5861,7 @@ local function fe()
 	return a;
 end
 local function me()
-	local n = CreateFrame("Frame", "", t.catagoryScreen);
+	local n = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	n:SetPoint("TopLeft", 5,  - 9)
 	n:SetPoint("BottomRight",  - 4, 4);
 	local d = e.GetBackdrop();
@@ -5955,7 +5957,7 @@ local function me()
 	l = o:CreateCaption(0, 0, e.locale["SELECT_LEVEL"], c, 20, 1, .82, 0, 1, nil)
 	l:ClearAllPoints();
 	l:SetPoint("Top", c, "Topleft", 170,  -50);
-	local r = CreateFrame("Frame", "", c);
+	local r = CreateFrame("Frame", "", c, config.backdroptmpl);
 	r:SetPoint("Topleft", 20,  -70)
 	r:SetPoint("Bottomleft", 20, 70);
 	r:SetWidth(300);
@@ -6024,7 +6026,7 @@ local function me()
 		n:SetID(a);
 		c["highlight"..a] = n;
 	end
-	n = CreateFrame("Frame", "", a);
+	n = CreateFrame("Frame", "", a, config.backdroptmpl);
 	n:SetPoint("Topright",  - 96 + 32 - 10 - 6,  - 64)
 	n:SetWidth(192 - 20 - 4);
 	n:SetHeight(192 - 20 - 4);
@@ -6037,7 +6039,7 @@ local function me()
 	t:SetWidth(192 - 14 - 20 - 4);
 	t:SetHeight(192 - 14 - 20 - 4);
 	a.levelImage = t;
-	n = CreateFrame("Frame", "", a);
+	n = CreateFrame("Frame", "", a, config.backdroptmpl);
 	n:SetPoint("Topright",  - 34,  - 236)
 	n:SetWidth(256);
 	n:SetHeight(60);
@@ -6060,7 +6062,7 @@ local function me()
 	l:SetPoint("Center");
 	l:SetWidth(220);
 	a.beatLevel = l;
-	n = CreateFrame("Frame", "", a);
+	n = CreateFrame("Frame", "", a, config.backdroptmpl);
 	n:SetPoint("Topright", a.bestFrame, "Bottomright", 0,  - 4)
 	n:SetWidth(256);
 	n:SetHeight(60);
@@ -6125,7 +6127,7 @@ local function me()
 	return a;
 end
 local function oe()
-	local n = CreateFrame("Frame", "", t.catagoryScreen);
+	local n = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	n:SetPoint("TopLeft", 5,  - 9)
 	n:SetPoint("BottomRight",  - 4, 4);
 	local r = e.GetBackdrop();
@@ -6297,7 +6299,7 @@ local function oe()
 	l:ClearAllPoints();
 	l:SetPoint("Top", a, "Top", 0,  - 22);
 	l:SetParent(n);
-	n = CreateFrame("Frame", "", a.duelInfo1);
+	n = CreateFrame("Frame", "", a.duelInfo1, config.backdroptmpl);
 	n:SetPoint("Topright", a, "Topright",  - 98,  - 60)
 	n:SetWidth(128);
 	n:SetHeight(128);
@@ -6616,7 +6618,7 @@ local function oe()
 	l:ClearAllPoints();
 	l:SetPoint("Top", a, "Top", 0,  - 22);
 	l:SetParent(n);
-	n = CreateFrame("Frame", "", a.duelInfo2);
+	n = CreateFrame("Frame", "", a.duelInfo2, config.backdroptmpl);
 	n:SetPoint("Topleft", a, "Topleft", 98,  - 60)
 	n:SetWidth(128);
 	n:SetHeight(128);
@@ -6651,7 +6653,7 @@ local function oe()
 	l:SetWidth(400);
 	l.caption1 = e.locale["DUEL_OPP_WL"]
 	a.winLossDuelsVs = l;
-	n = CreateFrame("Frame", "", a.duelInfo2);
+	n = CreateFrame("Frame", "", a.duelInfo2, config.backdroptmpl);
 	n:SetPoint("Topleft", a, "Topleft", 10,  - 190)
 	n:SetPoint("Topright", a, "Topright",  - 10,  - 190)
 	n:SetHeight(88);
@@ -6713,7 +6715,7 @@ local function oe()
 	l = o:CreateCaption(64 + 32 + 8 + 64 + 300, 12 + 32 + 8, "", n, 18, .05, .66, 1, 1, nil)
 	l.caption1 = e.locale["DUEL_BREAKDOWN4"]
 	n.fever = l;
-	n = CreateFrame("Frame", "", a.duelInfo2);
+	n = CreateFrame("Frame", "", a.duelInfo2, config.backdroptmpl);
 	n:SetPoint("Topleft", a, "Topleft", 10,  - 190 - 86)
 	n:SetPoint("Topright", a, "Topright",  - 10,  - 190 - 86)
 	n:SetHeight(88);
@@ -6871,7 +6873,7 @@ local function oe()
 	return a;
 end
 local function ee()
-	local l = CreateFrame("Frame", "", t.catagoryScreen);
+	local l = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	l:SetPoint("TopLeft", 5,  - 9)
 	l:SetPoint("BottomRight",  - 4, 4);
 	local d = e.GetBackdrop();
@@ -7146,7 +7148,7 @@ local function ee()
 	n.caption1 = n:GetText();
 	n.caption2 = e.locale["CHALLENGE_DETAILS"];
 	a.title = n;
-	local i = CreateFrame("Frame", "", a);
+	local i = CreateFrame("Frame", "", a, config.backdroptmpl);
 	i:SetPoint("Topleft", 10,  - 58)
 	i:SetPoint("Bottomleft", 10, 10);
 	i:SetWidth(200);
@@ -7156,7 +7158,7 @@ local function ee()
 	i:SetBackdrop(d);
 	i:SetBackdropColor(.4, .4, .4, 1);
 	i:SetBackdropBorderColor(1, 1, 1);
-	i = CreateFrame("Frame", "", i);
+	i = CreateFrame("Frame", "", i, config.backdroptmpl);
 	i:SetPoint("Topleft", 6,  - 30)
 	i:SetPoint("Bottomright",  - 6, 6 + 66);
 	d.bgFile = e.artPath.."windowBackground";
@@ -7304,7 +7306,7 @@ local function ee()
 	n:ClearAllPoints();
 	n:SetPoint("Bottom", i:GetParent(), "Bottom", 0, 10);
 	n:SetWidth(180);
-	i = CreateFrame("Frame", "", a);
+	i = CreateFrame("Frame", "", a, config.backdroptmpl);
 	i:SetPoint("Topleft", 10 + 200,  - 58)
 	i:SetPoint("Bottomright",  - 10, 10);
 	i:SetWidth(200);
@@ -7353,7 +7355,7 @@ local function ee()
 	n:SetText("");
 	n = o:CreateCaption(12, r, "", i, 12, 1, 1, 1, nil, nil)
 	a.stageDetails5a = n;
-	l = CreateFrame("Frame", "", i);
+	l = CreateFrame("Frame", "", i, config.backdroptmpl);
 	l:SetPoint("Topleft", 10,  - r)
 	l:SetWidth(128)
 	l:SetHeight(128)
@@ -7408,7 +7410,7 @@ local function ee()
 	l:ClearAllPoints();
 	l:SetPoint("Bottom", 75, 21);
 	a.backChallenge = l;
-	i = CreateFrame("Frame", "", i);
+	i = CreateFrame("Frame", "", i, config.backdroptmpl);
 	i:SetPoint("Topright",  - 6,  - 30)
 	i:SetPoint("Bottomright",  - 6, 6 + 66);
 	i:SetWidth(270);
@@ -7687,7 +7689,7 @@ local function ee()
 	n:SetWidth(150);
 	n.caption = e.locale["INVITED"];
 	a.invitedCount = n;
-	i = CreateFrame("Frame", "", a);
+	i = CreateFrame("Frame", "", a, config.backdroptmpl);
 	i:SetPoint("Topleft", 10,  - 135)
 	i:SetWidth(160);
 	i:SetHeight(204);
@@ -7778,7 +7780,7 @@ local function ee()
 		l:EnableMouseWheel(true);
 		l:SetID(e);
 	end
-	i = CreateFrame("Frame", "", a);
+	i = CreateFrame("Frame", "", a, config.backdroptmpl);
 	i:SetPoint("Topleft", 200,  - 135)
 	i:SetWidth(160);
 	i:SetHeight(204);
@@ -7820,7 +7822,7 @@ local function ee()
 		l:EnableMouseWheel(true);
 		l:SetID(e);
 	end
-	l = CreateFrame("Frame", "", a);
+	l = CreateFrame("Frame", "", a, config.backdroptmpl);
 	l:SetPoint("Topleft", 340 + 16 + 32 - 32 + 16,  - 46)
 	l:SetWidth(192 + 32)
 	l:SetHeight(192 + 32)
@@ -7953,7 +7955,7 @@ local function ee()
 		end
 	end);
 	a.nameGrabber = l;
-	l = CreateFrame("Frame", "", a.nameGrabber);
+	l = CreateFrame("Frame", "", a.nameGrabber, config.backdroptmpl);
 	l:SetPoint("Center")
 	l:SetWidth(560);
 	l:SetHeight(64);
@@ -8055,7 +8057,7 @@ local function ee()
 	return p;
 end
 local function G()
-	local l = CreateFrame("Frame", "", t.catagoryScreen);
+	local l = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	l:SetPoint("TopLeft", 297,  - 9)
 	l:SetPoint("BottomRight",  - 4, 4);
 	local d = e.GetBackdrop();
@@ -8076,7 +8078,7 @@ local function G()
 	n:ClearAllPoints();
 	n:SetPoint("Top", 0,  - 62);
 	n:SetWidth(l:GetWidth() - 20);
-	local a = CreateFrame("Frame", "", l);
+	local a = CreateFrame("Frame", "", l, config.backdroptmpl);
 	a:SetPoint("Top", 0,  - 114)
 	a:SetWidth(l:GetWidth() - 40);
 	a:SetHeight(230);
@@ -8136,7 +8138,7 @@ local function G()
 	end)
 	l:ClearAllPoints();
 	l:SetPoint("Bottom", 0, 18);
-	local n = CreateFrame("Frame", "", r);
+	local n = CreateFrame("Frame", "", r, config.backdroptmpl);
 	n:SetPoint("Topright", r, "Topleft", 8, 0)
 	n:SetPoint("Bottomright", r, "Bottomleft", 8, 0)
 	n:SetWidth(300);
@@ -8257,7 +8259,7 @@ local function G()
 	return r;
 end
 local function w()
-	local n = CreateFrame("Frame", "", t.catagoryScreen);
+	local n = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	n:SetPoint("TopLeft", 5,  - 9)
 	n:SetPoint("BottomRight",  - 4, 4);
 	local l = e.GetBackdrop();
@@ -8286,7 +8288,7 @@ local function w()
 			end
 		end
 	end
-	local r = CreateFrame("Frame", "", a);
+	local r = CreateFrame("Frame", "", a, config.backdroptmpl);
 	r:SetPoint("Topleft", 10,  - 10)
 	r:SetPoint("Bottomleft", 10, 10);
 	r:SetWidth(180);
@@ -8452,7 +8454,7 @@ local function w()
 	return a;
 end
 local function _()
-	local n = CreateFrame("Frame", "", t.catagoryScreen);
+	local n = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	n:SetPoint("TopLeft", 5,  - 9)
 	n:SetPoint("BottomRight",  - 4, 4);
 	local S = e.GetBackdrop();
@@ -8564,7 +8566,7 @@ local function _()
 		t.catagoryScreen.frames[6]:Hide();
 		t.credits:Show();
 	end, nil, true);
-	local l = CreateFrame("Frame", "", t.catagoryScreen);
+	local l = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	l:SetPoint("TopLeft", 5,  - 9)
 	l:SetPoint("BottomRight",  - 4, 4);
 	l:SetBackdrop(S);
@@ -8607,7 +8609,7 @@ local function _()
 	--Start Credits Screen
 	n:ClearAllPoints();
 	n:SetPoint("Bottom", 0, 30);
-	l = CreateFrame("Frame", "", t.catagoryScreen);
+	l = CreateFrame("Frame", "", t.catagoryScreen, config.backdroptmpl);
 	l:SetPoint("TopLeft", 5,  - 9)
 	l:SetPoint("BottomRight",  - 4, 4);
 	l:SetBackdrop(S);
@@ -8720,7 +8722,7 @@ local function _()
 	return d;
 end
 local function K()
-	local n = CreateFrame("Frame", "", t);
+	local n = CreateFrame("Frame", "", t, config.backdroptmpl);
 	n:SetPoint("TopLeft", 8,  - 80)
 	n:SetWidth(t:GetWidth() - 16 - 2);
 	n:SetHeight(t:GetHeight() - 80 - 6 - 2);
@@ -8990,7 +8992,7 @@ local function w(n, l, ...)
 	end
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
 	if not PeggleData.legalDisplayed then
-		local l = CreateFrame("Frame", "", t);
+		local l = CreateFrame("Frame", "", t, config.backdroptmpl);
 		l:SetWidth(160 * 2);
 		l:SetHeight(216 + 32);
 		l:SetToplevel(true);
@@ -9038,7 +9040,7 @@ local function w(n, l, ...)
 		e:SetPoint("Top", n, "Bottom", 0,  - 16);
 		l:SetHeight(n:GetHeight() + e:GetHeight() + 120);
 	end
-	local n = CreateFrame("Frame", "", t);
+	local n = CreateFrame("Frame", "", t, config.backdroptmpl);
 	n:SetWidth(290);
 	n:SetHeight(90 + 32);
 	n:SetToplevel(true);
@@ -9181,7 +9183,7 @@ local function w(n, l, ...)
 end
 local function W()
 	local d = e.artCut;
-	t = CreateFrame("Frame", "PeggleWindow", UIParent);
+	t = CreateFrame("Frame", "PeggleWindow", UIParent, config.backdroptmpl);
 	t:SetWidth(e.windowWidth);
 	t:SetHeight(e.windowHeight);
 	t:SetPoint("Center");
@@ -9865,12 +9867,12 @@ local function G()
 			y[t][e] = {};
 		end
 	end
-	local n = CreateFrame("ScrollFrame", nil, t);
+	local n = CreateFrame("ScrollFrame", nil, t, config.backdroptmpl);
 	n:SetWidth(e.boardWidth);
 	n:SetHeight(e.boardHeight);
 	n:SetPoint("Topleft", 53,  - 70);
 	n:Show();
-	r = CreateFrame("Frame", nil, t);
+	r = CreateFrame("Frame", nil, t, config.backdroptmpl);
 	r:SetWidth(e.boardWidth);
 	r:SetHeight(e.boardHeight);
 	r:ClearAllPoints();
@@ -10303,7 +10305,7 @@ local function N()
 		end
 	end);
 	t.peggleLootTimer = n;
-	n = CreateFrame("Frame", "", UIParent);
+	n = CreateFrame("Frame", "", UIParent, config.backdroptmpl);
 	n:SetPoint("Center")
 	n:SetWidth(310);
 	n:SetHeight(230);
