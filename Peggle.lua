@@ -3,6 +3,17 @@ local LEVELS = config.LEVELS
 local LEVEL_NAMES = config.LEVEL_NAMES
 
 config.backdroptmpl = BackdropTemplateMixin and "BackdropTemplate"
+config.isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
+
+config.GetCompatDate = function()
+	if config.isClassic then
+		local d = C_DateAndTime.GetTodaysDate()
+		return d.weekDay, d.month, d.day, d.year
+	else
+		local d = C_DateAndTime.GetCurrentCalendarTime()
+		return d.weekday, d.month, d.monthDay, d.year
+	end
+end
 
 disableSplashScreen = false
 
@@ -661,8 +672,7 @@ PeggleProfile.lastDuels = {};
 PeggleProfile.levelTracking = {};
 PeggleProfile.duelTracking = {};
 function o.MinuteDifference(h, u, S, a, i)
-	local date=C_DateAndTime.GetCurrentCalendarTime()
-	local t, l, c, r = date.weekday, date.month, date.monthDay, date.year;
+	local t, l, c, r = config.GetCompatDate()
 	local d, s = GetGameTime();
 	local n = 0;
 	if(r - i > 1)then
@@ -4882,8 +4892,7 @@ local function pe(c, m, x, d, l, S)
 	n[t[5]] = S;
 	n[t[6]] = true;
 	n[t[7]] = d;
-	local date=C_DateAndTime.GetCurrentCalendarTime()
-	local e, b, T, P = date.weekday, date.month, date.monthDay, date.year;
+	local e, b, T, P = config.GetCompatDate()
 	local f, S = GetGameTime();
 	Fe(c);
 	local a = #B;
@@ -4945,8 +4954,7 @@ local function ge(n)
 		local a = S(O(W(e, 10)));
 		local a = S(c(e, 11, 12));
 		local a = c(e, 69);
-		local date=C_DateAndTime.GetCurrentCalendarTime()
-		local e, e, e, e = date.weekday, date.month, date.monthDay, date.year;
+		local e, e, e, e = config.GetCompatDate()
 		local e, e = GetGameTime();
 		t[1] = n[o[4]];
 		t[2] = d;
@@ -8227,7 +8235,7 @@ local function G()
 		t:SetScript("OnLeave", r);
 		-- in Classic the frame templates are loadondemand
 		-- moreover, loading the addon early in retail will break textures in the talent frame
-		if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+		if config.isClassic then
 			UIParentLoadAddOn("Blizzard_TalentUI")
 		end
 		if(o)then
