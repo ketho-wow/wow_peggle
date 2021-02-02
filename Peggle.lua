@@ -723,11 +723,14 @@ end
 function o.TableFind(n, o)
 	local t, e;
 	for e = 1, #n do
-		-- hack: some names have their realm name appended and some don't
+		-- some names have their realm name appended and some don't
 		-- so peggle would not find a specific names in Battle mode
-		-- if(n[e] == o)then
-		if strfind(n[e], "-") then
-			if strfind(n[e], o) then
+		-- I don't know what else this function is used for, so check for a hyphen
+		-- this hack can be buggy for players with the same name but different realm
+		-- or players with a partial name match
+		if strfind(n[e], "-") or strfind(o, "-") then
+			local name = strmatch(o, "(.+)%-") or o
+			if strfind(n[e], name) then
 				t = e;
 				break;
 			end
