@@ -723,9 +723,19 @@ end
 function o.TableFind(n, o)
 	local t, e;
 	for e = 1, #n do
-		if(n[e] == o)then
-			t = e;
-			break;
+		-- hack: some names have their realm name appended and some don't
+		-- so peggle would not find a specific names in Battle mode
+		-- if(n[e] == o)then
+		if strfind(n[e], "-") then
+			if strfind(n[e], o) then
+				t = e;
+				break;
+			end
+		else
+			if(n[e] == o)then
+				t = e;
+				break;
+			end
 		end
 	end
 	return t
