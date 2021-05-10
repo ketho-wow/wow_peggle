@@ -1,9 +1,6 @@
-#@retail@
-## Interface: 90002
-#@end-retail@
-#@non-retail@
-# ## Interface: 11306
-#@end-non-retail@
+## Interface-Retail: 90005
+## Interface-Classic: 11307
+## Interface-BC: 20501
 ## Title: Peggle (Unofficial)
 ## Version: @project-version@
 ## Notes: The popular game Peggle, now back in World of Warcraft Classic!

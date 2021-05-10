@@ -3,6 +3,7 @@ local LEVELS = config.LEVELS
 local LEVEL_NAMES = config.LEVEL_NAMES
 
 config.backdroptmpl = BackdropTemplateMixin and "BackdropTemplate"
+config.isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 config.isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 
 config.GetCompatDate = function()
@@ -108,7 +109,7 @@ e.locale = {
 	["BEAT_THIS_LEVEL4"] = "+1 talent point earned\n(Full clear)",
 	["BRAG"] = "What channel would you like to brag to?",
 	["CHALLENGE"] = "BATTLE",
-	["CHALLENGE_DETAILS"] = "BATTLE DETAIL",
+	--["CHALLENGE_DETAILS"] = "BATTLE DETAIL",
 	["CHALLENGE_DESC"] = "Select a battle to view its details\nor create a new battle",
 	["CHALLENGE_DESC1"] = "Click a name to quickly add/remove it!",
 	["CHALLENGE_DESC2"] = "|cFFFF8C00CHAT CHANNELS: Adding a custom chat channel will invite all in the chat channel at the time of battle creation. This will not invite offline users, nor users who do not have the addon installed.\n\nYou may only invite custom channels.",
@@ -660,7 +661,7 @@ PeggleData.settings = {
 	inviteDecline = false,
 	hideOutdated = false;
 	soundVolume = 0,
-	minimapAngle = 17, -- avoid hiding behind clock and minimap tracking frame
+	minimapAngle = config.isRetail and 26 or 42, -- avoid hiding behind clock and minimap tracking frame
 	defaultPublish = "GUILD",
 };
 PeggleData.version = e.versionID;
@@ -4280,7 +4281,7 @@ local function Ne(o, n)
 									l = i(o.bouncer[t + 6] * 1e4 * (1 + (a * .1)));
 									r = i(o.bouncer[t + 6] * 1e4);
 								end
-								o:SpawnText(n, P(l), nil, nil, nil1, 0, 80, o.bouncer[t] + ((o.bouncer[t + 1] - o.bouncer[t]) / 2), 50, 0);
+								o:SpawnText(n, P(l), nil, nil, nil, 0, 80, o.bouncer[t] + ((o.bouncer[t + 1] - o.bouncer[t]) / 2), 50, 0);
 								w = w + l;
 								c[5] = c[5] + l;
 								c[4] = c[4] + l - r;
@@ -8889,7 +8890,7 @@ local function w(n, l, ...)
 			inviteDecline = false,
 			hideOutdated = false;
 			soundVolume = 0,
-			minimapAngle = 17,
+			minimapAngle = config.isRetail and 26 or 42,
 			defaultPublish = "GUILD",
 		};
 		PeggleData.version = e.versionID;
@@ -8922,9 +8923,13 @@ local function w(n, l, ...)
 		PeggleProfile.challenges = {};
 		PeggleProfile.version = 1.02;
 	end
-	-- fix up minimapAngle mistake in v2.2.1
-	if PeggleProfile.version == 2.2 and PeggleData.settings.minimapAngle == 35 then
-		PeggleData.settings.minimapAngle = 17
+	-- minimapAngle changes
+	if PeggleProfile.version == 2.2 and PeggleData.settings.minimapAngle == 17 then
+		if config.isRetail then
+			PeggleData.settings.minimapAngle = 26
+		else
+			PeggleData.settings.minimapAngle = 42
+		end
 	end
 	V = PeggleData
 	Y = PeggleProfile.challenges;
