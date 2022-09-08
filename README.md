@@ -1,6 +1,4 @@
-"The Peggle Institute has opened a branch in Azeroth!"
-
-Download: https://www.curseforge.com/wow/addons/peggle-classic
+### The Peggle Institute has opened a branch in Azeroth!
 
 © 2007, 2009 PopCap Games, Inc. All rights reserved. The  
 PopCap Logo and all other trademarks used herein that are listed  

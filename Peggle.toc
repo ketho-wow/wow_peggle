@@ -1,6 +1,6 @@
-## Interface-Retail: 90005
-## Interface-Classic: 11307
-## Interface-BC: 20501
+## Interface: 90207
+## Interface-Classic: 11403
+## Interface-Wrath: 30400
 ## Title: Peggle (Unofficial)
 ## Version: @project-version@
 ## Notes: The popular game Peggle, now back in World of Warcraft Classic!
@@ -9,6 +9,7 @@
 ## SavedVariablesPerCharacter: PeggleProfile
 ## X-Curse-Project-ID: 338690
 ## X-WoWI-ID: 24964
+## X-Wago-ID: ME6ggO61
 
 Levels.lua
 Peggle.lua
