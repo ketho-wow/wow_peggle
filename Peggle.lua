@@ -2235,7 +2235,7 @@ local function Je(r, o, l, e, i, a, d, t, n)
 	e:SetHeight(32);
 	e:SetAutoFocus(false);
 	e:SetNumeric(a);
-	e:SetMaxLetters(d);
+	-- e:SetMaxLetters(d);
 	e:SetHitRectInsets(0, 0, 8, 8);
 	e:Show();
 	if(t)then
@@ -2251,7 +2251,7 @@ local function Je(r, o, l, e, i, a, d, t, n)
 	return e, o + 24;
 end
 local function x(n, a, h, o, S, t, l, d, r, c, i, s)
-	local t = CreateFrame("CheckButton", "PeggleCheckbox_"..o, t, "OptionsCheckButtonTemplate");
+	local t = CreateFrame("CheckButton", "PeggleCheckbox_"..o, t, "InterfaceOptionsCheckButtonTemplate");
 	t:SetWidth(21);
 	t:SetHeight(21);
 	t:SetPoint("Topleft", n,  - a);
@@ -5898,7 +5898,7 @@ local function me()
 	n:Hide();
 	n.showID = 1;
 	t.fontObj = CreateFont("PeggleDropdownFont");
-	t.fontObj:SetFont(e.artPath.."OVERLOAD.ttf", 16);
+	t.fontObj:SetFont(e.artPath.."OVERLOAD.ttf", 16, "");
 	t.fontObj.oldSetFont = t.fontObj.SetFont;
 	t.fontObj.oldGetFont = t.fontObj.GetFont;
 	t.fontObj.oldGetFontObject = t.fontObj.GetFontObject;
@@ -9447,8 +9447,12 @@ local function W()
 	n:SetHeight(32);
 	n:SetTexture(e.artPath.."resize");
 	t.logo = a;
-	t:SetMaxResize(e.windowWidth * 1.5, e.windowHeight * 1.5);
-	t:SetMinResize(e.windowWidth / 2, e.windowHeight / 2);
+	if config.isRetail then
+		t:SetResizeBounds(e.windowWidth / 2, e.windowHeight / 2, e.windowWidth * 1.5, e.windowHeight * 1.5)
+	else
+		t:SetMaxResize(e.windowWidth * 1.5, e.windowHeight * 1.5);
+		t:SetMinResize(e.windowWidth / 2, e.windowHeight / 2);
+	end
 	t:SetResizable(true);
 	t:SetScript("OnSizeChanged", function(o)
 		local n = o:GetWidth();
