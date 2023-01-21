@@ -4,15 +4,16 @@ local LEVEL_NAMES = config.LEVEL_NAMES
 
 config.backdroptmpl = BackdropTemplateMixin and "BackdropTemplate"
 config.isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
+config.isWrath = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
 config.isClassic = (WOW_PROJECT_ID == WOW_PROJECT_CLASSIC)
 
 config.GetCompatDate = function()
-	if config.isClassic then
-		local d = C_DateAndTime.GetTodaysDate()
-		return d.weekDay, d.month, d.day, d.year
-	else
+	if C_DateAndTime.GetCurrentCalendarTime then
 		local d = C_DateAndTime.GetCurrentCalendarTime()
 		return d.weekday, d.month, d.monthDay, d.year
+	else -- classic era
+		local d = C_DateAndTime.GetTodaysDate()
+		return d.weekDay, d.month, d.day, d.year
 	end
 end
 
@@ -8247,7 +8248,7 @@ local function G()
 		t:SetScript("OnClick", xt);
 		t:SetScript("OnEnter", c);
 		t:SetScript("OnLeave", r);
-		-- in Classic the frame templates are loadondemand
+		-- in Classic Era the frame templates are loadondemand
 		-- moreover, loading the addon early in retail will break textures in the talent frame
 		if config.isClassic then
 			UIParentLoadAddOn("Blizzard_TalentUI")
@@ -9447,7 +9448,7 @@ local function W()
 	n:SetHeight(32);
 	n:SetTexture(e.artPath.."resize");
 	t.logo = a;
-	if config.isRetail then
+	if t.SetResizeBounds then
 		t:SetResizeBounds(e.windowWidth / 2, e.windowHeight / 2, e.windowWidth * 1.5, e.windowHeight * 1.5)
 	else
 		t:SetMaxResize(e.windowWidth * 1.5, e.windowHeight * 1.5);
