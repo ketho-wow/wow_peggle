@@ -1,48 +1,18 @@
 {
-	"Lua.diagnostics.globals": [
-		"AchievementFrame",
-		"BackdropTemplateMixin",
-		"CHAT_MSG_GUILD",
-		"CHAT_MSG_PARTY",
-		"CHAT_MSG_RAID",
-		"ChatFrame_AddMessageEventFilter",
-		"ChatFrame_RemoveMessageEventFilter",
-		"ChatTypeInfo",
-		"DECLINE",
-		"ERR_CHAT_PLAYER_NOT_FOUND_S",
-		"GameTooltip_SetDefaultAnchor",
-		"GameTooltip",
-		"getglobal",
-		"GROUP",
-		"HIGHLIGHT_FONT_COLOR",
-		"message",
-		"Minimap",
-		"MouseIsOver",
-		"NONE",
-		"RaidBossEmoteFrame",
-		"RaidNotice_AddMessage",
-		"SetDesaturation",
-		"SlashCmdList",
-		"STANDARD_TEXT_FONT",
-		"TOOLTIP_TALENT_LEARN",
-		"TOOLTIP_TALENT_NEXT_RANK",
-		"UIDropDownMenu_AddButton",
-		"UIDropDownMenu_GetCurrentDropDown",
-		"UIDropDownMenu_Initialize",
-		"UIDROPDOWNMENU_MENU_LEVEL",
-		"UIDropDownMenu_SetAnchor",
-		"UIDropDownMenu_SetSelectedName",
-		"UIDropDownMenu_SetSelectedValue",
-		"UIDropDownMenu_SetText",
-		"UIDropDownMenu_SetWidth",
-		"UIParent",
-		"UIParentLoadAddOn",
-		"WOW_PROJECT_CLASSIC",
-		"WOW_PROJECT_ID",
-		"GetCursorPosition"
-	],
-	"Lua.diagnostics.disable": [
-		"undefined-field",
-		"lowercase-global"
-	]
+    "Lua.runtime.version": "Lua 5.1",
+    "Lua.runtime.builtin": {
+        "basic": "disable",
+        "debug": "disable",
+        "io": "disable",
+        "math": "disable",
+        "os": "disable",
+        "package": "disable",
+        "string": "disable",
+        "table": "disable",
+        "utf8": "disable"
+    },
+    "Lua.workspace.library": [
+        "~\\.vscode\\extensions\\ketho.wow-api-0.17.5\\Annotations"
+    ],
+    "Lua.diagnostics.enable": false
 }
