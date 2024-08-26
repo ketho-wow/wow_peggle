@@ -2,6 +2,35 @@ local AddOn, config = ...
 local LEVELS = config.LEVELS
 local LEVEL_NAMES = config.LEVEL_NAMES
 
+-- This recreates the AutoCastShineTemplate
+-- source: https://github.com/p3lim-wow/Molinari/commit/ed1ab223c84ec643b37f936c4cc8d5184c7c0f01
+-- add to config since we would otherwise exceed 200 local variable limit (someone needs to deobfuscate the code)
+config.emulateAutoCastShineTemplateFrame = function(type, name, parent, template, id)
+	-- template and id is not supported and setting it will raise an error
+	if template or id then
+		error("template and id is not supported")
+	end
+
+	local frame = CreateFrame(type, name, parent)
+	local sparkles = {}
+
+	for _ = 1, 4 do
+		for mult = 3, 0, -1 do
+			local spark = frame:CreateTexture(nil, 'OVERLAY')
+			spark:SetPoint('CENTER')
+			spark:SetSize(12 + (3 * mult), 12 + (3 * mult))
+			spark:SetTexture("Interface\\Cooldown\\star4")
+			spark:SetBlendMode('ADD')
+			table.insert(sparkles, spark)
+		end
+	end
+
+	frame.sparkles = sparkles
+
+	return frame
+end
+
+
 config.backdroptmpl = BackdropTemplateMixin and "BackdropTemplate"
 config.isRetail = (WOW_PROJECT_ID == WOW_PROJECT_MAINLINE)
 config.isWrath = (WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC)
@@ -78,7 +107,7 @@ TALENT_ARROW_TEXTURECOORDS = {
 };
 
 local e = {};
-e.versionString = GetAddOnMetadata("Peggle", "Version");
+e.versionString = C_AddOns.GetAddOnMetadata("Peggle", "Version");
 e.versionID = 2.2;
 e.addonName = "PEGGLE";
 e.temp = {};
@@ -2200,7 +2229,8 @@ local function De(a, c, n, d, o, r, l)
 	n:SetScript("OnLeave", nt);
 	if(l)then
 		t.sparkCount = (t.sparkCount or(0)) + 1
-		local t = CreateFrame("Frame", "PeggleSparks"..t.sparkCount, n, "AutoCastShineTemplate")
+		local t = config.emulateAutoCastShineTemplateFrame("Frame", "PeggleSparks"..t.sparkCount, n)
+
 		t:ClearAllPoints();
 		t:SetPoint("Topleft", 6,  - 6);
 		t:SetWidth(n:GetWidth() - 12);
@@ -2208,7 +2238,6 @@ local function De(a, c, n, d, o, r, l)
 		t:SetScript("OnUpdate", e.sparkleFunc);
 		n.sparks = t;
 		n.sparks:Hide();
-		t.sparkles = {};
 		if(l == 1)then
 			t.speed = {2, 2, 2, 2};
 			t.timer = {0, .5, 1, 1.5};
@@ -2222,7 +2251,6 @@ local function De(a, c, n, d, o, r, l)
 		local n = t:GetName();
 		local e;
 		for e = 1, 16 do
-			s(t.sparkles, getglobal(n..e));
 			t.sparkles[e]:Show();
 			t.sparkles[e]:SetVertexColor(1, 1, 0);
 		end
