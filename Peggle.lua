@@ -187,7 +187,7 @@ e.locale = {
 	["CREDITS8a"] = "BraveOne - Aerie Peak [A]\n".."Johndoe - Executus EU [A]\n".."Kinu - Ravencrest [H]\n".."Klauen - Blackrock [H]\n".."Lothaer - Spinebreaker [A]\n".."Naiad - Dalaran [A]",
 	["CREDITS8b"] = "Palasadia - Doomhammer [H]\n".."Polgarra - Terokkar [A]\n".."Smashtastic - Khadgar [A]\n".."Sythalin - Thunderlord[A]\n".."Thanotos- Turalyon[A]\n".."Vodax - Dalaran [A]\n".."Zoquara - Nordrassil [A]",
 	["CREDITS9"] = "Github Contributors",
-	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210\n Ketho, C0rn3j",
+	["CREDITS9a"]= " adamz01h\n Nimos\n ZombieProtectionAgency\n Andy1210\n Ketho, C0rn3j, chrisliebaer",
 	["DUEL"] = "DUEL",
 	["DUEL_BREAKDOWN1"] = "Your Score: %s",
 	["DUEL_BREAKDOWN1a"] = "Opponent's Score: %s",
@@ -8530,10 +8530,13 @@ local function _()
 	n:SetPoint("Top", 0,  - 70);
 	n = x(a, l - 5, e.locale["OPT_MINIMAP"], "showMinimapIcon", true, d, function(e)
 		PeggleData.settings[e.key] = (e:GetChecked());
+		local ldbicon = LibStub("LibDBIcon-1.0")
 		if(e:GetChecked())then
-			t.minimap:Show();
+			PeggleData.minimap.hide = false
+			ldbicon:Show("PeggleIcon")
 		else
-			t.minimap:Hide();
+			PeggleData.minimap.hide = true
+			ldbicon:Hide("PeggleIcon")
 		end
 	end, 1, .82, 0);
 	local r = function(e)
@@ -8994,11 +8997,11 @@ local function w(n, l, ...)
 	if(PeggleData.settings.showMinimapIcon ~= true)then
 		t.minimap:Hide();
 	end
-	if(PeggleData.settings.minimapDetached == nil)then
-		t.minimap:SetPoint("Center", Minimap, "Center",  - (76 * k(T(PeggleData.settings.minimapAngle or 270))), (76 * I(T(PeggleData.settings.minimapAngle or 270))))
-	else
-		t.minimap:SetPoint("Center", UIParent, "bottomleft", PeggleData.settings.minimapX, PeggleData.settings.minimapY);
-	end
+	-- if(PeggleData.settings.minimapDetached == nil)then
+	-- 	t.minimap:SetPoint("Center", Minimap, "Center",  - (76 * k(T(PeggleData.settings.minimapAngle or 270))), (76 * I(T(PeggleData.settings.minimapAngle or 270))))
+	-- else
+	-- 	t.minimap:SetPoint("Center", UIParent, "bottomleft", PeggleData.settings.minimapX, PeggleData.settings.minimapY);
+	-- end
 	R(false);
 	if(PeggleData.settings.openLogIn ~= true)then
 		n:Hide();
@@ -10214,62 +10217,63 @@ local function y()
 			end
 		end
 	end);
-	n:SetScript("OnEnter", function(t)
-		t.highlight:Show();
-		GameTooltip_SetDefaultAnchor(GameTooltip, UIParent);
-		GameTooltip:SetText("|cFFFFFFFFPeggle");
-		GameTooltip:AddLine(e.locale["_TOOLTIP_MINIMAP"]);
-		GameTooltip:Show();
-	end);
-	n:SetScript("OnLeave", function(e)
-		e.highlight:Hide();
-		GameTooltip:Hide();
-	end);
-	n:SetScript("OnUpdate", function(e, r)
-		if(e.moving)then
-			local t, t = GetCursorPosition()
-			local t = Minimap:GetLeft() + Minimap:GetWidth() / 2
-			local t = Minimap:GetBottom() + Minimap:GetHeight() / 2
-			PeggleData.settings.minimapAngle = angle
-			local o, l = GetCursorPosition()
-			local i = Minimap:GetLeft() + Minimap:GetWidth() / 2
-			local a = Minimap:GetBottom() + Minimap:GetHeight() / 2
-			local n = (o / UIParent:GetScale()) - i;
-			local t = (l / UIParent:GetScale()) - a;
-			if((n ^ 2 + t ^ 2) > Minimap:GetWidth() ^ 2)then
-				PeggleData.settings.minimapDetached = true;
-				n = o / UIParent:GetScale();
-				t = l / UIParent:GetScale();
-				PeggleData.settings.minimapX = n;
-				PeggleData.settings.minimapY = t;
-				e:SetPoint("Center", UIParent, "bottomleft", n, t);
-			else
-				local t = gt(math.atan2((l / UIParent:GetScale()) - a, i - (o / UIParent:GetScale())));
-				PeggleData.settings.minimapAngle = t;
-				PeggleData.settings.minimapDetached = nil;
-				e:SetPoint("Center", Minimap, "Center",  - (76 * k(T(t))), (76 * I(T(t))))
-			end
-		end
-		if(e.notice)then
-			e.elapsed = e.elapsed + r;
-			if(e.elapsed >= .5)then
-				e.elapsed = 0;
-				if(e.icon:IsShown())then
-					e.icon:Hide();
-					e.icon2:Show();
-					e.on = true
-				else
-					e.icon:Show();
-					e.icon2:Hide();
-					e.on = nil;
-				end
-			end
-		elseif(e.on)then
-			e.icon:Show();
-			e.icon2:Hide();
-			e.on = nil;
-		end
-	end);
+	-- n:SetScript("OnEnter", function(t)
+	-- 	t.highlight:Show();
+	-- 	GameTooltip_SetDefaultAnchor(GameTooltip, UIParent);
+	-- 	GameTooltip:SetText("|cFFFFFFFFPeggle");
+	-- 	GameTooltip:AddLine(e.locale["_TOOLTIP_MINIMAP"]);
+	-- 	GameTooltip:Show();
+	-- end);
+	-- n:SetScript("OnLeave", function(e)
+	-- 	e.highlight:Hide();
+	-- 	GameTooltip:Hide();
+	-- end);
+	-- n:SetScript("OnUpdate", function(e, r)
+	-- 	if(e.moving)then
+	-- 		local t, t = GetCursorPosition()
+	-- 		local t = Minimap:GetLeft() + Minimap:GetWidth() / 2
+	-- 		local t = Minimap:GetBottom() + Minimap:GetHeight() / 2
+	-- 		PeggleData.settings.minimapAngle = angle
+	-- 		local o, l = GetCursorPosition()
+	-- 		local i = Minimap:GetLeft() + Minimap:GetWidth() / 2
+	-- 		local a = Minimap:GetBottom() + Minimap:GetHeight() / 2
+	-- 		local n = (o / UIParent:GetScale()) - i;
+	-- 		local t = (l / UIParent:GetScale()) - a;
+	-- 		if((n ^ 2 + t ^ 2) > Minimap:GetWidth() ^ 2)then
+	-- 			PeggleData.settings.minimapDetached = true;
+	-- 			n = o / UIParent:GetScale();
+	-- 			t = l / UIParent:GetScale();
+	-- 			PeggleData.settings.minimapX = n;
+	-- 			PeggleData.settings.minimapY = t;
+	-- 			e:SetPoint("Center", UIParent, "bottomleft", n, t);
+	-- 		else
+	-- 			local t = gt(math.atan2((l / UIParent:GetScale()) - a, i - (o / UIParent:GetScale())));
+	-- 			PeggleData.settings.minimapAngle = t;
+	-- 			PeggleData.settings.minimapDetached = nil;
+	-- 			e:SetPoint("Center", Minimap, "Center",  - (76 * k(T(t))), (76 * I(T(t))))
+	-- 		end
+	-- 	end
+	-- 	if(e.notice)then
+	-- 		e.elapsed = e.elapsed + r;
+	-- 		if(e.elapsed >= .5)then
+	-- 			e.elapsed = 0;
+	-- 			if(e.icon:IsShown())then
+	-- 				e.icon:Hide();
+	-- 				e.icon2:Show();
+	-- 				e.on = true
+	-- 			else
+	-- 				e.icon:Show();
+	-- 				e.icon2:Hide();
+	-- 				e.on = nil;
+	-- 			end
+	-- 		end
+	-- 	elseif(e.on)then
+	-- 		e.icon:Show();
+	-- 		e.icon2:Hide();
+	-- 		e.on = nil;
+	-- 	end
+	-- end);
+	n:Hide()
 	t.minimap = n;
 end
 local function N()
@@ -11399,5 +11403,3 @@ local function T()
 	end
 end
 T();
-local e;
---
