@@ -5,6 +5,7 @@
 ## Author: PopCap Games Inc.
 ## SavedVariables: PeggleData
 ## SavedVariablesPerCharacter: PeggleProfile
+## IconTexture: Interface\AddOns\Peggle\images\minimap
 ## X-Curse-Project-ID: 338690
 ## X-WoWI-ID: 24964
 ## X-Wago-ID: ME6ggO61

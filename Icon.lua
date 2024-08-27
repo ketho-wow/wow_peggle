@@ -6,7 +6,7 @@ end
 local ldb = LibStub("LibDataBroker-1.1"):NewDataObject("PeggleLDB", {
 	type = "data source",
 	text = "Peggle",
-	icon = "Interface\\AddOns\\Peggle\\images\\minimap.tga",
+	icon = "Interface\\AddOns\\Peggle\\images\\minimap",
 	OnClick = TogglePeggleWindow,
 	OnTooltipShow = function(tt)
 		tt:AddLine("|cFFFFFFFFPeggle")
