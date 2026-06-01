@@ -5028,6 +5028,7 @@ local function ge(n)
 	return true;
 end
 local function X(n, n, e, ...)
+	if issecretvalue(e)then return end
 	e = gsub(e, "%*", "");
 	local e = {strsplit(",", e)};
 	local n = t.catagoryScreen.frames[3].content2;
@@ -5042,6 +5043,7 @@ local function X(n, n, e, ...)
 	return true
 end
 local function M(n, a, t, ...)
+	if issecretvalue(t)then return end
 	local t = string.match(t, e.filterText);
 	if(t)then
 		if(e.onlineList[t])then
@@ -10518,7 +10520,7 @@ local function k()
 	i:SetScript("OnEvent", function(m, n, C, i, l, a)
 		a = string.match(a, "(.*)%-(.*)") or a
 		if(n == "CHAT_MSG_SYSTEM")and(m.watchError)then
-			if(string.find(C, m.watchError))then
+			if not issecretvalue(C)and(string.find(C, m.watchError))then
 				m.watchError = nil;
 				m.inviteTimer = nil;
 				t.duelStatus = nil;
@@ -10529,7 +10531,7 @@ local function k()
 				return;
 			end
 		end
-		if(C == m.prefix)then
+		if(n == "CHAT_MSG_ADDON")and(C == m.prefix)then
 			local h, l, d, P, x, n, r;
 			h, l, i, d, P, x, n = strsplit("+", i);
 			local n = (D(A(l or(""))or(0)) == l);
