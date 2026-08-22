@@ -1092,12 +1092,12 @@ local function Ve()
 			t, o, n = .5, .5, .5;
 		end
 		if(t == .5)then
-			SetDesaturation(e.icon, true);
+			e.icon:SetDesaturated(true);
 			--getglobal(e.rank:GetName().."Border"):Hide();
 			e.rank:Hide();
 			e.border:SetVertexColor(t, o, n);
 		else
-			SetDesaturation(e.icon, false);
+			e.icon:SetDesaturated(false);
 			--getglobal(e.rank:GetName().."Border"):Show();
 			e.rank:Show();
 			e.rank:SetVertexColor(t, o, n);
@@ -4839,7 +4839,7 @@ local function R(e)
 			Ge();
 		end
 		Q = false;
-		SetDesaturation(t.menuButton.background, true);
+		t.menuButton.background:SetDesaturated(true);
 		t.menuButton:EnableMouse(false);
 	else
 		t.gameMenu:Hide();
@@ -4849,7 +4849,7 @@ local function R(e)
 		t.catagoryScreen:Hide();
 		t.charPortrait:Show();
 		Q = true;
-		SetDesaturation(t.menuButton.background, false);
+		t.menuButton.background:SetDesaturated(false);
 		t.menuButton:EnableMouse(true);
 	end
 end
@@ -5751,10 +5751,10 @@ local function ce()
 	n:SetScript("OnShow", function(n)
 		d:Hide();
 		if(e[e.newInfo[13]])or(e.extraInfo)or((t.duelStatus == 3)and t.catagoryScreen.frames[2].player1.value == -1)then
-			SetDesaturation(n.restart.background, true);
+			n.restart.background:SetDesaturated(true);
 			n.restart:EnableMouse(false);
 		else
-			SetDesaturation(n.restart.background, false);
+			n.restart.background:SetDesaturated(false);
 			n.restart:EnableMouse(true);
 		end
 	end);
@@ -5845,7 +5845,7 @@ local function fe()
 	local o = function(e)
 		e:SetBackdropBorderColor(.1, .6, .6);
 		e.hover = nil;
-		if not MouseIsOver(e:GetParent())then
+		if not e:GetParent():IsMouseOver()then
 		e:GetParent():SetAlpha(.25);
 		end
 	end
@@ -5910,7 +5910,7 @@ local function fe()
 		n:onEnter();
 	end);
 	n:SetScript("OnLeave", function(e)
-		if not MouseIsOver(e:GetParent())then
+		if not e:GetParent():IsMouseOver()then
 			e:GetParent():SetAlpha(.25);
 		end
 		n:onEnter();
@@ -7007,10 +7007,10 @@ local function ee()
 				n.listSlider:SetValue(F(0, #i - 13));
 			end
 			if(e.cCount > 4)then
-				SetDesaturation(n.newChallenge.background, true);
+				n.newChallenge.background:SetDesaturated(true);
 				n.newChallenge:EnableMouse(false);
 			else
-				SetDesaturation(n.newChallenge.background, false);
+				n.newChallenge.background:SetDesaturated(false);
 				n.newChallenge:EnableMouse(true);
 			end
 			local d = n.listSlider:GetValue();
@@ -7143,12 +7143,12 @@ local function ee()
 			if(l.removed == true)then
 				n.stageDetails2a:SetText(e.locale["_EXPIRED"]);
 				n.stageDetails2a:SetTextColor(.5, .5, .5);
-				SetDesaturation(n.startChallenge1.background, true);
+				n.startChallenge1.background:SetDesaturated(true);
 				n.startChallenge1:EnableMouse(false);
 			elseif(l.ended == true)then
 				n.stageDetails2a:SetFormattedText("%dh %dm", o.TimeBreakdown(l.elapsed));
 				n.stageDetails2a:SetTextColor(.5, .5, .5);
-				SetDesaturation(n.startChallenge1.background, true);
+				n.startChallenge1.background:SetDesaturated(true);
 				n.startChallenge1:EnableMouse(false);
 			else
 				hours, minutes = o.TimeBreakdown(l.elapsed);
@@ -7160,7 +7160,7 @@ local function ee()
 				else
 					n.stageDetails2a:SetTextColor(0, 1, 0);
 				end
-				SetDesaturation(n.startChallenge1.background, false);
+				n.startChallenge1.background:SetDesaturated(false);
 				n.startChallenge1:EnableMouse(true);
 			end
 			n.stageDetails3a:SetText(a[4])
@@ -7192,11 +7192,11 @@ local function ee()
 			t = l - t;
 			if(r == -1)then
 				n.stageDetails6a:SetText(n.stageDetails6a.caption1);
-				SetDesaturation(n.startChallenge1.background, false);
+				n.startChallenge1.background:SetDesaturated(false);
 				n.startChallenge1:EnableMouse(true);
 			else
 				n.stageDetails6a:SetFormattedText(n.stageDetails6a.caption2, t, l);
-				SetDesaturation(n.startChallenge1.background, true);
+				n.startChallenge1.background:SetDesaturated(true);
 				n.startChallenge1:EnableMouse(false);
 			end
 		end
@@ -9546,7 +9546,7 @@ local function W()
 				t:SetAlpha(PeggleData.settings.mouseOffTrans);
 				e.fading = nil;
 			else
-				if not MouseIsOver(t)then
+				if not t:IsMouseOver()then
 					if not t.resizing then
 						e:EnableMouse(true);
 						e.mouseOver = nil;
@@ -10201,7 +10201,7 @@ local function y()
 			if(t:IsVisible())then
 				t:Hide()
 			else
-				if not MouseIsOver(t)then
+				if not t:IsMouseOver()then
 					t:SetAlpha(PeggleData.settings.mouseOnTrans);
 					t.mouseOverScreen:EnableMouse(true);
 					t.mouseOverScreen.mouseOver = nil;
@@ -10877,7 +10877,7 @@ local function k()
 							print("|CFFFFDD00Peggle: "..string.format(n.name1.caption2, a));
 						end
 						if(PeggleData.settings.inviteRaid == true)then
-							RaidNotice_AddMessage(RaidBossEmoteFrame, "Peggle: "..string.format(n.name1.caption2, a), ChatTypeInfo["RAID_BOSS_EMOTE"])
+							RaidWarningUtil.AddMessage("Peggle: "..string.format(n.name1.caption2, a), ChatTypeInfo["RAID_BOSS_EMOTE"], nil, RaidWarningUtil.MessageType.BossEmote)
 						end
 						config.SendAddonMessage(C, r[2], "WHISPER", a);
 						n.name2:SetText(a);
