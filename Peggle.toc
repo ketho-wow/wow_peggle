@@ -1,7 +1,7 @@
-## Interface: 120001, 120000, 50503, 20505, 11508
+## Interface: 16001, 120001, 120000, 50503, 20505, 11508
 ## Title: Peggle (Unofficial)
 ## Version: @project-version@
-## Notes: The popular game Peggle, now back in World of Warcraft Classic!
+## Notes: The popular game Peggle, now in World of Warcraft: Forever and Classic!
 ## Author: PopCap Games Inc.
 ## SavedVariables: PeggleData
 ## SavedVariablesPerCharacter: PeggleProfile
@@ -27,6 +27,8 @@ Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
 Libs\LibDBIcon-1.0\lib.xml
+Libs\LibEditMode\namespaced.lua [AllowLoadGameType mainline]
+Libs\LibEditMode\embed.xml [AllowLoadGameType mainline]
 #@end-no-lib-strip@
 
 Levels.lua

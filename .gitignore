@@ -1,2 +1,4 @@
 Libs
 .vscode
+dist/
+tools/package.py
