@@ -45,12 +45,27 @@ config.GetCompatDate = function()
 	end
 end
 
--- 12.0.0 chat messaging lockdown restrictions
+-- Forever uses the Mainline API despite its 1.60.x version number.
+-- Check capabilities so clients without chat lockdown keep working too.
+config.IsChatMessagingLocked = function()
+	return C_ChatInfo.InChatMessagingLockdown and C_ChatInfo.InChatMessagingLockdown()
+end
+
 config.SendAddonMessage = function(prefix, message, chatType, target)
-	if config.isRetail and not C_ChatInfo.InChatMessagingLockdown() or not config.isRetail then
-		C_ChatInfo.SendAddonMessage(prefix, message, chatType, target)
+	if not config.IsChatMessagingLocked() then
+		return C_ChatInfo.SendAddonMessage(prefix, message, chatType, target)
 	end
 end
+
+config.SendChatMessage = function(message, chatType, language, target)
+	if not config.IsChatMessagingLocked() then
+		return (C_ChatInfo.SendChatMessage or SendChatMessage)(message, chatType, language, target)
+	end
+end
+
+config.IsSecretValue = issecretvalue or function() return false end
+config.AddMessageEventFilter = ChatFrameUtil and ChatFrameUtil.AddMessageEventFilter or ChatFrame_AddMessageEventFilter
+config.RemoveMessageEventFilter = ChatFrameUtil and ChatFrameUtil.RemoveMessageEventFilter or ChatFrame_RemoveMessageEventFilter
 
 disableSplashScreen = false
 
@@ -5028,7 +5043,7 @@ local function ge(n)
 	return true;
 end
 local function X(n, n, e, ...)
-	if issecretvalue(e)then return end
+	if config.IsSecretValue(e)then return end
 	e = gsub(e, "%*", "");
 	local e = {strsplit(",", e)};
 	local n = t.catagoryScreen.frames[3].content2;
@@ -5043,7 +5058,7 @@ local function X(n, n, e, ...)
 	return true
 end
 local function M(n, a, t, ...)
-	if issecretvalue(t)then return end
+	if config.IsSecretValue(t)then return end
 	local t = string.match(t, e.filterText);
 	if(t)then
 		if(e.onlineList[t])then
@@ -5090,7 +5105,7 @@ local function le()
 	table.wipe(n);
 	table.wipe(e);
 	table.wipe(a);
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
+	config.AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
 	local i, o, i, e, l;
 	local i = Y
 	for t = 1, #i do
@@ -5708,9 +5723,9 @@ local function he()
 			o = n.publishInfo
 		end
 		if(l > 0)then
-			SendChatMessage(o, "CHANNEL", nil, l);
+			config.SendChatMessage(o, "CHANNEL", nil, l);
 		else
-			SendChatMessage(o, PeggleData.settings.defaultPublish);
+			config.SendChatMessage(o, PeggleData.settings.defaultPublish);
 		end
 		n.bragScreen:Hide();
 		if not n.publishDuel then
@@ -6473,7 +6488,7 @@ local function oe()
 		local d = n.name2:GetText()or"";
 		if(d ~= "")then
 			o:Hide();
-			ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
+			config.AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
 			t.levelList:Hide();
 			n.winLoss:ClearAllPoints();
 			n.winLoss:SetPoint("Topleft", n, "Bottomleft", 14, 190);
@@ -7239,7 +7254,7 @@ local function ee()
 	r.background = r:CreateTexture(nil, "background");
 	r.background:SetPoint("TopLeft")
 	r.background:SetPoint("BottomRight",  - 1, 0)
-	r.background:SetTexture(0, 0, 0, .35);
+	r.background:SetColorTexture(0, 0, 0, .35);
 	getglobal(r:GetName().."ScrollUpButton"):SetScript("OnClick", function(e)
 		e:GetParent():SetValue(e:GetParent():GetValue() - 1);
 	end);
@@ -7498,7 +7513,7 @@ local function ee()
 	r.background = r:CreateTexture(nil, "background");
 	r.background:SetPoint("TopLeft")
 	r.background:SetPoint("BottomRight",  - 1, 0)
-	r.background:SetTexture(0, 0, 0, .35);
+	r.background:SetColorTexture(0, 0, 0, .35);
 	getglobal(r:GetName().."ScrollUpButton"):SetScript("OnClick", function(e)
 		e:GetParent():SetValue(e:GetParent():GetValue() - 1);
 	end);
@@ -7764,7 +7779,7 @@ local function ee()
 	r.background = r:CreateTexture(nil, "background");
 	r.background:SetPoint("TopLeft")
 	r.background:SetPoint("BottomRight",  - 1, 0)
-	r.background:SetTexture(0, 0, 0, .35);
+	r.background:SetColorTexture(0, 0, 0, .35);
 	getglobal(r:GetName().."ScrollUpButton"):SetScript("OnClick", getglobal("Peggle_challengeNameListSliderScrollUpButton"):GetScript("OnClick"));
 	getglobal(r:GetName().."ScrollDownButton"):SetScript("OnClick", getglobal("Peggle_challengeNameListSliderScrollDownButton"):GetScript("OnClick"));
 	a.nameSlider = r;
@@ -7833,7 +7848,7 @@ local function ee()
 		l:SetScript("OnMouseWheel", b);
 		l.tex = i:CreateTexture(nil, "Artwork");
 		l.tex:SetAllPoints(l);
-		l.tex:SetTexture(1, 1, 0);
+		l.tex:SetColorTexture(1, 1, 0);
 		l.tex:SetAlpha(0);
 		l:EnableMouse(true);
 		l:EnableMouseWheel(true);
@@ -7855,7 +7870,7 @@ local function ee()
 	r.background = r:CreateTexture(nil, "background");
 	r.background:SetPoint("TopLeft")
 	r.background:SetPoint("BottomRight",  - 1, 0)
-	r.background:SetTexture(0, 0, 0, .35);
+	r.background:SetColorTexture(0, 0, 0, .35);
 	getglobal(r:GetName().."ScrollUpButton"):SetScript("OnClick", getglobal("Peggle_challengeNameListSliderScrollUpButton"):GetScript("OnClick"));
 	getglobal(r:GetName().."ScrollDownButton"):SetScript("OnClick", getglobal("Peggle_challengeNameListSliderScrollDownButton"):GetScript("OnClick"));
 	a.inviteSlider = r;
@@ -7875,7 +7890,7 @@ local function ee()
 		l:SetScript("OnMouseWheel", T);
 		l.tex = i:CreateTexture(nil, "Artwork");
 		l.tex:SetAllPoints(l);
-		l.tex:SetTexture(1, 1, 0);
+		l.tex:SetColorTexture(1, 1, 0);
 		l.tex:SetAlpha(0);
 		l:EnableMouse(true);
 		l:EnableMouseWheel(true);
@@ -7945,7 +7960,7 @@ local function ee()
 			end
 		end
 		if(#n.grabNames > 0)then
-			ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL_LIST", X);
+			config.AddMessageEventFilter("CHAT_MSG_CHANNEL_LIST", X);
 			n.nameGrabber.elapsed = -1;
 			n.nameGrabber:Show();
 			return;
@@ -7961,7 +7976,7 @@ local function ee()
 		end
 		local a = pe(a, d, i, r, l, o)
 		s(Y, a);
-		ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
+		config.AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
 		a.serverName = e.name;
 		local o = t.network.server;
 		a[e.newInfo[14]] = true;
@@ -8008,7 +8023,7 @@ local function ee()
 				e.elapsed = -1;
 			else
 				e:Hide();
-				ChatFrame_RemoveMessageEventFilter("CHAT_MSG_CHANNEL_LIST", X);
+				config.RemoveMessageEventFilter("CHAT_MSG_CHANNEL_LIST", X);
 				e.content.newChallenge:GetScript("OnClick")(e.content.newChallenge);
 			end
 		end
@@ -8276,8 +8291,9 @@ local function G()
 		local t = CreateFrame("Button", "PeggleTalent"..n, t, "ActionButtonTemplate");
 		t:SetPoint("Topleft", d, a);
 		t:SetID(n);
-		t:GetNormalTexture():SetTexture(0, 0, 0, 0);
-		t.rank = _G[t:GetName().."Count"];
+		t:GetNormalTexture():SetColorTexture(0, 0, 0, 0);
+		-- Modern ActionButtonTemplate nests Count in TextOverlayContainer.
+		t.rank = t.Count or _G[t:GetName().."Count"];
 		t.border = _G[t:GetName().."Border"];
 		t.icon = _G[t:GetName().."Icon"];
 		t.icon:SetTexture(e.artPath..i[n]);
@@ -8538,14 +8554,7 @@ local function _()
 	n:SetPoint("Top", 0,  - 70);
 	n = x(a, l - 5, e.locale["OPT_MINIMAP"], "showMinimapIcon", true, d, function(e)
 		PeggleData.settings[e.key] = (e:GetChecked());
-		local ldbicon = LibStub("LibDBIcon-1.0")
-		if(e:GetChecked())then
-			PeggleData.minimap.hide = false
-			ldbicon:Show("PeggleIcon")
-		else
-			PeggleData.minimap.hide = true
-			ldbicon:Hide("PeggleIcon")
-		end
+		config.UpdateMinimapIcon();
 	end, 1, .82, 0);
 	local r = function(e)
 		PeggleData.settings[e.key] = (e:GetChecked());
@@ -9056,7 +9065,7 @@ local function w(n, l, ...)
 	if(Y[1])then
 	ne();
 	end
-	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
+	config.AddMessageEventFilter("CHAT_MSG_SYSTEM", M)
 	if not PeggleData.legalDisplayed then
 		local l = CreateFrame("Frame", "", t, config.backdroptmpl);
 		l:SetWidth(160 * 2);
@@ -9291,7 +9300,7 @@ local function W()
 	n:SetPoint("Topleft", 2, 0);
 	n:SetPoint("Topright",  - 8, 0);
 	n:SetHeight(26);
-	n:SetTexture(0, 0, 0);
+	n:SetColorTexture(0, 0, 0);
 	t.coverUp = n;
 	local l = CreateFrame("Frame", "", t);
 	l:SetHeight(128);
@@ -9315,7 +9324,7 @@ local function W()
 	local a = n:GetWidth();
 	a = f(a, 128) / 128 + i(a / 128);
 	n:SetTexCoord(0, a, 0, 1);
-	n:SetTexture(e.artPath.."windowCoverCenter", true);
+	n:SetTexture(e.artPath.."windowCoverCenter", "REPEAT", "REPEAT");
 	t.topCover = n;
 	local r = m(0, 0, 20, "buttonClose", nil, "closeButton", l, function(e)
 		t:Hide();
@@ -9846,7 +9855,7 @@ local function n()
 	physicsWindow:SetHeight(60);
 	physicsWindow.background = physicsWindow:CreateTexture(nil, background);
 	physicsWindow.background:SetAllPoints(physicsWindow);
-	physicsWindow.background:SetTexture(0, 0, 0, .5);
+	physicsWindow.background:SetColorTexture(0, 0, 0, .5);
 	physicsWindow:Hide();
 	local e = o:CreateCaption(10, 15, "Gravity                       pixels/sec", physicsWindow, 12)
 	e:ClearAllPoints()
@@ -10083,13 +10092,13 @@ local function G()
 	n:SetPoint("Center", t, "Top", 3,  - 101);
 	n:SetWidth(72);
 	n:SetHeight(50);
-	n:SetTexture(0, 0, 0);
+	n:SetColorTexture(0, 0, 0);
 	t.shooter.faceBG1 = n;
 	n = l:CreateTexture(nil, "Background");
 	n:SetPoint("Center", t, "Top", 2,  - 98);
 	n:SetWidth(50);
 	n:SetHeight(74);
-	n:SetTexture(0, 0, 0);
+	n:SetColorTexture(0, 0, 0);
 	t.shooter.faceBG2 = n;
 	n = l:CreateTexture(nil, "Artwork");
 	n:SetPoint("Center", t, "Top", 0,  - 101);
@@ -10475,6 +10484,9 @@ local function k()
 	i.throttleCount = 0;
 	i.elapsed = 0;
 	i:SetScript("OnUpdate", function(e, n)
+		if config.IsChatMessagingLocked() then
+			return;
+		end
 		if(e.inviteTimer)then
 			e.inviteTimer = e.inviteTimer + n;
 			if(e.inviteTimer >= 5)then
@@ -10507,7 +10519,7 @@ local function k()
 						config.SendAddonMessage(l, o, t, n);
 						e.throttleCount = e.throttleCount + 1;
 					elseif(t == "RAID")or(t == "PARTY")then
-						SendChatMessage(o, t);
+						config.SendChatMessage(o, t);
 						e.throttleCount = e.throttleCount + 1;
 					end
 					if(#e.queue == 0)then
@@ -10518,9 +10530,8 @@ local function k()
 		end
 	end);
 	i:SetScript("OnEvent", function(m, n, C, i, l, a)
-		a = string.match(a, "(.*)%-(.*)") or a
 		if(n == "CHAT_MSG_SYSTEM")and(m.watchError)then
-			if not issecretvalue(C)and(string.find(C, m.watchError))then
+			if not config.IsSecretValue(C)and(string.find(C, m.watchError))then
 				m.watchError = nil;
 				m.inviteTimer = nil;
 				t.duelStatus = nil;
@@ -10531,7 +10542,15 @@ local function k()
 				return;
 			end
 		end
-		if(n == "CHAT_MSG_ADDON")and(C == m.prefix)then
+		if(n == "CHAT_MSG_ADDON")then
+			-- Ignore restricted payloads before comparing or parsing their values.
+			if config.IsSecretValue(C) or config.IsSecretValue(i) or config.IsSecretValue(a) then
+				return;
+			end
+			if C ~= m.prefix or type(i) ~= "string" or type(a) ~= "string" then
+				return;
+			end
+			a = string.match(a, "(.*)%-(.*)") or a;
 			local h, l, d, P, x, n, r;
 			h, l, i, d, P, x, n = strsplit("+", i);
 			local n = (D(A(l or(""))or(0)) == l);
@@ -11047,6 +11066,9 @@ local function k()
 	i.prefix = e.addonName;
 	i.elapsed = 0;
 	i:SetScript("OnUpdate", function(t, n)
+		if config.IsChatMessagingLocked() then
+			return;
+		end
 		local e = e.sentList;
 		if t.lastIndex then
 			if(t.lastIndex == -1)then
@@ -11092,6 +11114,9 @@ local function k()
 	i.updated = nil;
 	i.list = {}
 	i:SetScript("OnUpdate", function(t, n)
+		if config.IsChatMessagingLocked() then
+			return;
+		end
 		if not t.processing then
 			if(n > 1)then
 				n = 1;
@@ -11371,7 +11396,7 @@ local function T()
 			t.peggleLootTimer.serverRemaining = 40;
 			t.peggleLootTimer:Show();
 			if(n > 5)then
-					SendChatMessage(c, "RAID")
+					config.SendChatMessage(c, "RAID")
 				for n = 1, n do
 					name = GetRaidRosterInfo(n);
 					if(name)then
@@ -11379,7 +11404,7 @@ local function T()
 					end
 				end
 			else
-				SendChatMessage(c, "PARTY")
+				config.SendChatMessage(c, "PARTY")
 				t.network:Send(e.commands[20], l, "WHISPER", e.name);
 				n = 4
 				for n = 1, n do

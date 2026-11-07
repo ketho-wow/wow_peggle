@@ -1,7 +1,15 @@
 package-as: Peggle
 
+ignore:
+  - tests
+  - tools
+  - dist
+
 externals:
   Libs/LibStub: https://repos.curseforge.com/wow/ace3/trunk/LibStub
   Libs/CallbackHandler-1.0: https://repos.curseforge.com/wow/ace3/trunk/CallbackHandler-1.0
   Libs/LibDataBroker-1.1: https://github.com/tekkub/libdatabroker-1-1
   Libs/LibDBIcon-1.0: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
+  Libs/LibEditMode:
+    url: https://github.com/p3lim-wow/LibEditMode
+    tag: '19'
